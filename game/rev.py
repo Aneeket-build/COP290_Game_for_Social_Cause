@@ -11,6 +11,9 @@ screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Game Title")
 
 play_hover_sound = pygame.mixer.Sound("play_hover_sound.mp3")
+caught_sound = pygame.mixer.Sound("caught.wav")
+dead_sound = pygame.mixer.Sound("dead_sound.wav")
+bounce_sound = pygame.mixer.Sound("bounce_sound.mp3")
 # Load the background image
 background = pygame.image.load("main.jpg")
 background = pygame.transform.scale(background, (800, 600))
@@ -33,6 +36,11 @@ trampoline_img = pygame.image.load("trampoline.png")
 sprite_img_bounce = pygame.image.load("bounce.png")
 sprite_img_stand = pygame.image.load("stand.png")
 sprite1 = pygame.image.load("fall-turn1.png")
+sprite_dead = pygame.image.load("dead.png")
+sprite_fall1 = pygame.image.load("fall1.png")
+sprite_fall2 = pygame.image.load("fall2.png")
+sprite_fall3 = pygame.image.load("fall3.png")
+sprite_fall4 = pygame.image.load("fall4.png")
 
 # Set up the game objects
 sprites = []
@@ -98,17 +106,21 @@ while True:
                 sprite_rect[0].y += ((2*sprite_rect[2]+1)/50)
                 sprite_rect[2]+=1
                 if sprite_rect[0].colliderect(trampoline_rect):
-                    sprites.remove(sprite_rect)
+                    sprite_rect[1]=6
+                    caught_sound.play()
                     score += 1
-                elif sprite_rect[0].y > HEIGHT:
-                    sprites.remove(sprite_rect)
+                elif sprite_rect[0].y > HEIGHT - sprite_img_fall.get_height():
+                    sprite_rect[1]=5
+                    dead_sound.play()
             elif sprite_rect[1]==0:
                 sprite_rect[0].y += (2+((2*sprite_rect[2]-1)/50))
                 sprite_rect[2]+=1
                 if sprite_rect[0].colliderect(trampoline_rect):
+                    bounce_sound.play()
                     sprite_rect[1] = 1
-                elif sprite_rect[0].y > HEIGHT:
-                    sprites.remove(sprite_rect)
+                elif sprite_rect[0].y > HEIGHT- sprite_img_fall.get_height():
+                    sprite_rect[1]=5
+                    dead_sound.play()
             elif sprite_rect[1] == 1:
                 if sprite_rect[2]>1:
                     sprite_rect[0].y -= (((2*sprite_rect[2]-1)/50))
@@ -116,25 +128,47 @@ while True:
                 else:
                     sprite_rect[1]=2  
             elif sprite_rect[1] == -1:
-                if pause<30:
-                    pause+=1
+                if sprite_rect[3]<30:
+                    sprite_rect[3]+=1
                 else:
-                    pause = 0
-                    sprite_rect[1]=0          
-
+                    sprite_rect[3] = 0
+                    sprite_rect[1]=0   
+            elif sprite_rect[1]==5:
+                if sprite_rect[3]<60:
+                    sprite_rect[3]+=1
+                else:
+                    sprites.remove(sprite_rect)   
+                    sprite_rect[3] = 0            
+            elif sprite_rect[1]==6:
+                if sprite_rect[3] < 50:
+                    sprite_rect[3]+=1
+                else:
+                    sprites.remove(sprite_rect)
+                    sprite_rect[3] = 0    
         # Generate a new sprite if needed
-        if len(sprites) < 3:
-            sprites.append([create_sprite(),-1,3])
+        if len(sprites) < 2:
+            sprites.append([create_sprite(),-1,3,0])
 
         # Draw game objects
         for sprite_rect in sprites:
             if sprite_rect[1]==1:
-                if sprite_rect[2]<=2:
+                if sprite_rect[2]<=10 or sprite_rect[2]>=95:
                     screen.blit(sprite1, sprite_rect[0])
                 else:    
                     screen.blit(sprite_img_bounce, sprite_rect[0])
             elif sprite_rect[1]==-1:
                 screen.blit(sprite_img_stand, sprite_rect[0])
+            elif sprite_rect[1]==5:
+                screen.blit(sprite_dead,sprite_rect[0])    
+            elif sprite_rect[1]==6:
+                if sprite_rect[3]<10:
+                    screen.blit(sprite_fall1,sprite_rect[0])  
+                elif sprite_rect[3]<20:
+                    screen.blit(sprite_fall2,sprite_rect[0])  
+                elif sprite_rect[3]<30:
+                    screen.blit(sprite_fall3,sprite_rect[0])  
+                else:
+                    screen.blit(sprite_fall4,sprite_rect[0])  
             else:
                 screen.blit(sprite_img_fall, sprite_rect[0])
         screen.blit(trampoline_img, trampoline_rect)
