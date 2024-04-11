@@ -5,6 +5,9 @@ import random
 # Initialize Pygame
 pygame.init()
 
+hit_sound = pygame.mixer.Sound("hit.mp3")
+catch_sound = pygame.mixer.Sound("phone_catch.mp3")
+
 bg_game3 = pygame.image.load("bg_game3.png")
 # Set up the display
 screen = pygame.display.set_mode((800, 600))
@@ -22,6 +25,7 @@ enemy_img4 = pygame.image.load('catcher/run4.png')
 enemy_img5 = pygame.image.load('catcher/run5.png')
 enemy_img6 = pygame.image.load('catcher/run6.png')
 enemy_imgh = pygame.image.load('catcher/hit.png')
+enemy_imgc = pygame.image.load('catcher/catch.png')
 
 # Catapult position and state
 catapult_pos = (400, 75)
@@ -64,6 +68,7 @@ class Enemy:
 rocks = []
 enemies = []
 enemies_hit = []
+enemies_catch = []
 clock = pygame.time.Clock()
 running = True
 thrower = 0
@@ -123,6 +128,8 @@ while running:
     for rock in rocks:
         for enemy in enemies:
             if rock.rect.colliderect(enemy[0].rect):
+                catch_sound.play()
+                enemies_catch.append([enemy[0],0])
                 rocks.remove(rock)
                 enemies.remove(enemy)
 
@@ -134,6 +141,7 @@ while running:
     for enemy in enemies:
         enemy[0].move()
         if enemy[0].pos[1] < 75:
+            hit_sound.play()
             enemies_hit.append([enemy[0],0])
             enemies.remove(enemy)
     
@@ -144,7 +152,17 @@ while running:
         else:
             enemies_hit.remove(hit)    
 
-    if random.randint(0, 100) < 10 and len(enemies)<2:
+    for caught in enemies_catch:
+        if caught[1]==0:
+            caught[0].move()
+            caught[0].move()
+        if caught[1]<15: 
+            screen.blit(enemy_imgc,caught[0].rect)
+            caught[1]+=1
+        else:
+            enemies_catch.remove(caught)    
+
+    if random.randint(0, 100) < 10 and len(enemies)<3:
         enemy_pos = (random.randint(50,750), 600)
         enemies.append([Enemy(enemy_pos),1])
 

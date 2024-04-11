@@ -103,7 +103,7 @@ while True:
         # Update sprite positions
         for sprite_rect in sprites:
             if sprite_rect[1]==2:
-                sprite_rect[0].y += ((2*sprite_rect[2]+1)/50)
+                sprite_rect[0].y += ((2*sprite_rect[2]+1)/10)
                 sprite_rect[2]+=1
                 if sprite_rect[0].colliderect(trampoline_rect):
                     sprite_rect[1]=6
@@ -113,7 +113,7 @@ while True:
                     sprite_rect[1]=5
                     dead_sound.play()
             elif sprite_rect[1]==0:
-                sprite_rect[0].y += (2+((2*sprite_rect[2]-1)/50))
+                sprite_rect[0].y += (2+((2*sprite_rect[2]-1)/10))
                 sprite_rect[2]+=1
                 if sprite_rect[0].colliderect(trampoline_rect):
                     bounce_sound.play()
@@ -123,7 +123,7 @@ while True:
                     dead_sound.play()
             elif sprite_rect[1] == 1:
                 if sprite_rect[2]>1:
-                    sprite_rect[0].y -= (((2*sprite_rect[2]-1)/50))
+                    sprite_rect[0].y -= (((2*sprite_rect[2]-1)/10))
                     sprite_rect[2]-=1
                 else:
                     sprite_rect[1]=2  
@@ -152,7 +152,7 @@ while True:
         # Draw game objects
         for sprite_rect in sprites:
             if sprite_rect[1]==1:
-                if sprite_rect[2]<=10 or sprite_rect[2]>=95:
+                if sprite_rect[2]<=10 or sprite_rect[2]>=500:
                     screen.blit(sprite1, sprite_rect[0])
                 else:    
                     screen.blit(sprite_img_bounce, sprite_rect[0])
@@ -177,4 +177,4 @@ while True:
 
     # Update the display
     pygame.display.flip()
-    clock.tick(60)
+    clock.tick(30)
