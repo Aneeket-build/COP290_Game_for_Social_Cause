@@ -77,14 +77,14 @@ while running:
 
         if event.type == pygame.MOUSEBUTTONDOWN and not arm_stretched:
             arm_stretched = True
-            catapult_start_pos = pygame.mouse.get_pos()
+            mouse_start_pos = pygame.mouse.get_pos()
             thrower =1 
 
         elif event.type == pygame.MOUSEBUTTONUP and arm_stretched:
             arm_stretched = False
-            catapult_end_pos = pygame.mouse.get_pos()
-            dx = catapult_start_pos[0] - catapult_end_pos[0]
-            dy = catapult_start_pos[1] - catapult_end_pos[1]
+            mouse_end_pos = pygame.mouse.get_pos()
+            dx = mouse_start_pos[0] - mouse_end_pos[0]
+            dy = mouse_start_pos[1] - mouse_end_pos[1]
             throw_angle = math.degrees(math.atan2(dy, dx))
             phones.append(Phone(thrower_pos, throw_angle))
             thrower =2
@@ -105,48 +105,48 @@ while running:
     if arm_stretched:
         pygame.draw.line(screen, (255,255,255), thrower_pos, pygame.mouse.get_pos(), 5)  
 
-    for rock in phones:
-        screen.blit(rock.image, rock.rect)
+    for phone in phones:
+        screen.blit(phone.image, phone.rect)
 
-    for enemy in runners:
-        if enemy[1]==1:
-            screen.blit(runner1, enemy[0].rect)
-            enemy[1]+=1
-        elif enemy[1]==2:
-            screen.blit(runner2, enemy[0].rect)
-            enemy[1]+=1
-        elif enemy[1]==3:
-            screen.blit(runner3, enemy[0].rect)
-            enemy[1]+=1
-        elif enemy[1]==4:
-            screen.blit(runner4, enemy[0].rect)
-            enemy[1]+=1
-        elif enemy[1]==5:
-            screen.blit(runner5, enemy[0].rect)
-            enemy[1]+=1
-        elif enemy[1]==6:
-            screen.blit(runner6, enemy[0].rect)
-            enemy[1]=1
+    for runner in runners:
+        if runner[1]==1:
+            screen.blit(runner1, runner[0].rect)
+            runner[1]+=1
+        elif runner[1]==2:
+            screen.blit(runner2, runner[0].rect)
+            runner[1]+=1
+        elif runner[1]==3:
+            screen.blit(runner3, runner[0].rect)
+            runner[1]+=1
+        elif runner[1]==4:
+            screen.blit(runner4, runner[0].rect)
+            runner[1]+=1
+        elif runner[1]==5:
+            screen.blit(runner5, runner[0].rect)
+            runner[1]+=1
+        elif runner[1]==6:
+            screen.blit(runner6, runner[0].rect)
+            runner[1]=1
 
-    for rock in phones:
-        for enemy in runners:
-            if rock.rect.colliderect(enemy[0].rect):
+    for phone in phones:
+        for runner in runners:
+            if phone.rect.colliderect(runner[0].rect):
                 catch_sound.play()
-                runners_catch.append([enemy[0],0])
-                phones.remove(rock)
-                runners.remove(enemy)
+                runners_catch.append([runner[0],0])
+                phones.remove(phone)
+                runners.remove(runner)
 
-    for rock in phones:
-        rock.move()
-        if rock.pos[1] < 0 or rock.pos[0] < 0 or rock.pos[0] > 800:
-            phones.remove(rock)
+    for phone in phones:
+        phone.move()
+        if phone.pos[1] < 0 or phone.pos[0] < 0 or phone.pos[0] > 800:
+            phones.remove(phone)
 
-    for enemy in runners:
-        enemy[0].move()
-        if enemy[0].pos[1] < 75:
+    for runner in runners:
+        runner[0].move()
+        if runner[0].pos[1] < 75:
             hit_sound.play()
-            runners_hit.append([enemy[0],0])
-            runners.remove(enemy)
+            runners_hit.append([runner[0],0])
+            runners.remove(runner)
     
     for hit in runners_hit:
         if hit[1] < 15:
@@ -166,8 +166,8 @@ while running:
             runners_catch.remove(caught)    
 
     if random.randint(0, 100) < 10 and len(runners)<3:
-        enemy_pos = (random.randint(50,750), 600)
-        runners.append([Customer(enemy_pos),1])
+        runner_pos = (random.randint(50,750), 600)
+        runners.append([Customer(runner_pos),1])
 
     pygame.display.flip()
     clock.tick(30)
