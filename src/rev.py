@@ -12,6 +12,8 @@ screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Game Title")
 
 play_hover_sound = pygame.mixer.Sound("play_hover_sound.mp3")
+bg_audio_2 = pygame.mixer.Sound("../Assets/audio/scene2/scene2_audio.wav")
+bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
 caught_sound = pygame.mixer.Sound("caught.wav")
 dead_sound = pygame.mixer.Sound("dead_sound.wav")
 bounce_sound = pygame.mixer.Sound("bounce_sound.mp3")
@@ -116,6 +118,9 @@ runners_hit = []
 runners_catch = []
 thrower = 0
 
+last_spawned = 0
+last_to_last_spawned = 0
+
 # Game loop
 while True:
     for event in pygame.event.get():
@@ -139,6 +144,7 @@ while True:
                 background = pygame.image.load("factory bg.jpg")
                 background = pygame.transform.scale(background, (800, 600))
                 screen_name = "page 1"
+                bg_audio_2.play()
             # Draw the background
         screen.blit(background, (0, 0))
 
@@ -230,9 +236,12 @@ while True:
             else:
                 screen.blit(sprite_img_fall, sprite_rect[0])
         screen.blit(trampoline_img, trampoline_rect)
-        if score+neg_score==15:
-            if score>11:
+        if score+neg_score==8:
+            if score>6:
                 screen_name="game3"
+                score=0
+                neg_score=0
+                bg_audio_3.play()
             else:
                 score=0
                 neg_score=0    
@@ -297,6 +306,7 @@ while True:
         for phone in phones:
             for runner in runners:
                 if phone.rect.colliderect(runner[0].rect):
+                    score+=1
                     catch_sound.play()
                     runners_catch.append([runner[0],0])
                     phones.remove(phone)
@@ -310,6 +320,7 @@ while True:
         for runner in runners:
             runner[0].move()
             if runner[0].pos[1] < 75:
+                neg_score+=1
                 hit_sound.play()
                 runners_hit.append([runner[0],0])
                 runners.remove(runner)
@@ -332,8 +343,22 @@ while True:
                 runners_catch.remove(caught)    
 
         if random.randint(0, 100) < 10 and len(runners)<3:
-            runner_pos = (random.randint(50,750), 600)
-            runners.append([Customer(runner_pos),1])
+            spawn_at = random.choice([random.randint(50,300),random.randint(500,750)])
+            if abs(spawn_at-last_spawned)>50 and abs(spawn_at-last_to_last_spawned)>50:
+                runner_pos = (spawn_at, 600)
+                runners.append([Customer(runner_pos),1])
+                last_to_last_spawned = last_spawned
+                last_spawned = spawn_at
+
+        if score+neg_score==25:
+            if score>20:
+                screen_name="home page"
+                score=0
+                neg_score=0
+            else:
+                screen_name="page 1"   
+                score=0
+                neg_score=0   
 
 
     # Update the display
