@@ -14,14 +14,15 @@ pygame.display.set_caption("Game Title")
 play_hover_sound = pygame.mixer.Sound("play_hover_sound.mp3")
 bg_audio_2 = pygame.mixer.Sound("../Assets/audio/scene2/scene2_audio.wav")
 bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
-caught_sound = pygame.mixer.Sound("caught.wav")
-dead_sound = pygame.mixer.Sound("dead_sound.wav")
-bounce_sound = pygame.mixer.Sound("bounce_sound.mp3")
-hit_sound = pygame.mixer.Sound("hit.mp3")
-catch_sound = pygame.mixer.Sound("phone_catch.mp3")
+caught_sound = pygame.mixer.Sound("../Assets/audio/scene2/caught.wav")
+dead_sound = pygame.mixer.Sound("../Assets/audio/scene2/dead_sound.wav")
+bounce_sound = pygame.mixer.Sound("../Assets/audio/scene2/bounce_sound.mp3")
+hit_sound = pygame.mixer.Sound("../Assets/audio/scene3/hit.mp3")
+catch_sound = pygame.mixer.Sound("../Assets/audio/scene3/phone_catch.mp3")
 # Load the background image
 background = pygame.image.load("main.jpg")
 background = pygame.transform.scale(background, (800, 600))
+bg_game2 = pygame.image.load("factory bg.jpg")
 bg_game3 = pygame.image.load("bg_game3.png")
 
 # Load the font
@@ -141,8 +142,6 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN and screen_name=="home page":
             # Check if the mouse click is within the button rectangle
             if play_button_rect.collidepoint(event.pos):
-                background = pygame.image.load("factory bg.jpg")
-                background = pygame.transform.scale(background, (800, 600))
                 screen_name = "page 1"
                 bg_audio_2.play()
             # Draw the background
@@ -155,7 +154,7 @@ while True:
         # Draw the "PLAY" button
         screen.blit(play_button,play_button_rect)
     elif screen_name=="page 1":
-        screen.blit(background, (0, 0))
+        screen.blit(bg_game2, (0, 0))
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] and trampoline_rect.x >0:
             trampoline_rect.x -= trampoline_speed
