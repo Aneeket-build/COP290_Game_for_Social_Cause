@@ -14,12 +14,14 @@ pygame.display.set_caption("Game Title")
 play_hover_sound = pygame.mixer.Sound("play_hover_sound.mp3")
 bg_audio_2 = pygame.mixer.Sound("../Assets/audio/scene2/scene2_audio.wav")
 bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
+bg_audio_3.set_volume(5)
 caught_sound = pygame.mixer.Sound("../Assets/audio/scene2/caught.wav")
 caught_sound.set_volume(0.2)
 dead_sound = pygame.mixer.Sound("../Assets/audio/scene2/dead_sound.wav")
 bounce_sound = pygame.mixer.Sound("../Assets/audio/scene2/bounce_sound.mp3")
 hit_sound = pygame.mixer.Sound("../Assets/audio/scene3/hit.mp3")
 catch_sound = pygame.mixer.Sound("../Assets/audio/scene3/phone_catch.mp3")
+catch_sound.set_volume(0.5)
 
 doom_sound = pygame.mixer.Sound("../Assets/audio/doom/doom.mp3")
 
@@ -34,7 +36,7 @@ bg_descent = pygame.image.load("../Assets/sprites/doom/doom1.png")
 # Load the font
 font = pygame.font.Font("play_font.ttf", 45)
 
-screen_name = "descent"
+screen_name = "game3"
 
 # Initial text size and button rectangle
 text_size = 55
@@ -80,6 +82,19 @@ score = 0
 neg_score =0
 
 clock = pygame.time.Clock()
+
+font = pygame.font.Font(None, 30)
+message = "Use left and right arrow keys to save the workers."
+text_surface = font.render(message, True, (255, 255, 255))
+text_rect = text_surface.get_rect()
+text_rect.centerx = screen.get_rect().centerx
+text_rect.top = 15
+
+message2 = "Pull and launch the new phone towards incoming customers."
+text_surface2 = font.render(message2,True,(255,255,255))
+text_rect2 = text_surface2.get_rect()
+text_rect2.centerx = screen.get_rect().centerx
+text_rect2.top = 150
 
 def create_sprite():
     return sprite_img_fall.get_rect(topleft=(random.randint(75, WIDTH - sprite_img_fall.get_width()-75), 140-sprite_img_fall.get_height()))
@@ -256,6 +271,9 @@ while True:
             else:
                 screen.blit(sprite_img_fall, sprite_rect[0])
         screen.blit(trampoline_img, trampoline_rect)
+
+        screen.blit(text_surface, text_rect)
+
         if score+neg_score==8:
             if score>5:
                 screen_name="game3"
@@ -269,6 +287,7 @@ while True:
 
     elif screen_name=="game3":
         screen.blit(bg_game3,(0,0))
+        screen.blit(text_surface2,text_rect2)
 
         if event.type == pygame.MOUSEBUTTONDOWN and not arm_stretched:
             arm_stretched = True
