@@ -5,31 +5,41 @@ import random
 # Initialize Pygame
 pygame.init()
 
-hit_sound = pygame.mixer.Sound("hit.mp3")
-catch_sound = pygame.mixer.Sound("phone_catch.mp3")
+bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
+bg_audio_3.set_volume(5)
+
+hit_sound = pygame.mixer.Sound("../Assets/audio/scene3/hit.mp3")
+catch_sound = pygame.mixer.Sound("../Assets/audio/scene3/phone_catch.mp3")
+catch_sound.set_volume(0.5)
 
 bg_game3 = pygame.image.load("bg_game3.png")
 # Set up the display
 screen = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("Catapult Game")
 
 # Load images
-stand_img = pygame.image.load('thrower/img5.png')
-throwup = pygame.image.load('thrower/img2.png')
-throwdown = pygame.image.load('thrower/img3.png')
-thrown = pygame.image.load('thrower/img4.png')
-pickup = pygame.image.load('thrower/img1.png')
-phone_img = pygame.image.load('phone.png')
-runner1 = pygame.image.load('catcher/run1.png')
-runner2 = pygame.image.load('catcher/run2.png')
-runner3 = pygame.image.load('catcher/run3.png')
-runner4 = pygame.image.load('catcher/run4.png')
-runner5 = pygame.image.load('catcher/run5.png')
-runner6 = pygame.image.load('catcher/run6.png')
-runner_hit = pygame.image.load('catcher/hit.png')
-runner_catch = pygame.image.load('catcher/catch.png')
+stand_img = pygame.image.load('../Assets/sprites/scene3/thrower/img5.png')
+throwup = pygame.image.load('../Assets/sprites/scene3/thrower/img2.png')
+throwdown = pygame.image.load('../Assets/sprites/scene3/thrower/img3.png')
+thrown = pygame.image.load('../Assets/sprites/scene3/thrower/img4.png')
+pickup = pygame.image.load('../Assets/sprites/scene3/thrower/img1.png')
+phone_img = pygame.image.load('../Assets/sprites/scene3/phone.png')
+runner1 = pygame.image.load('../Assets/sprites/scene3/catcher/run1.png')
+runner2 = pygame.image.load('../Assets/sprites/scene3/catcher/run2.png')
+runner3 = pygame.image.load('../Assets/sprites/scene3/catcher/run3.png')
+runner4 = pygame.image.load('../Assets/sprites/scene3/catcher/run4.png')
+runner5 = pygame.image.load('../Assets/sprites/scene3/catcher/run5.png')
+runner6 = pygame.image.load('../Assets/sprites/scene3/catcher/run6.png')
+runner_hit = pygame.image.load('../Assets/sprites/scene3/catcher/hit.png')
+runner_catch = pygame.image.load('../Assets/sprites/scene3/catcher/catch.png')
 
-# Catapult position and state
+font = pygame.font.Font(None, 30)
+message2 = "Pull and launch the new phone towards incoming customers."
+text_surface2 = font.render(message2,True,(255,255,255))
+text_rect2 = text_surface2.get_rect()
+text_rect2.centerx = screen.get_rect().centerx
+text_rect2.top = 150
+
+
 thrower_pos = (400, 75)
 arm_stretched = False
 throw_angle = 0
@@ -66,28 +76,39 @@ phones = []
 runners = []
 runners_hit = []
 runners_catch = []
+
+last_spawned = 0
+last_to_last_spawned = 0
+
 clock = pygame.time.Clock()
 running = True
 thrower = 0
+
+score=0
+neg_score=0
+
+bg_audio_3.play()
+
 while running:
     screen.blit(bg_game3,(0,0))
+    screen.blit(text_surface2,text_rect2)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-        if event.type == pygame.MOUSEBUTTONDOWN and not arm_stretched:
-            arm_stretched = True
-            mouse_start_pos = pygame.mouse.get_pos()
-            thrower =1 
+    if event.type == pygame.MOUSEBUTTONDOWN and not arm_stretched:
+        arm_stretched = True
+        mouse_start_pos = pygame.mouse.get_pos()
+        thrower =1 
 
-        elif event.type == pygame.MOUSEBUTTONUP and arm_stretched:
-            arm_stretched = False
-            mouse_end_pos = pygame.mouse.get_pos()
-            dx = mouse_start_pos[0] - mouse_end_pos[0]
-            dy = mouse_start_pos[1] - mouse_end_pos[1]
-            throw_angle = math.degrees(math.atan2(dy, dx))
-            phones.append(Phone(thrower_pos, throw_angle))
-            thrower =2
+    elif event.type == pygame.MOUSEBUTTONUP and arm_stretched:
+        arm_stretched = False
+        mouse_end_pos = pygame.mouse.get_pos()
+        dx = mouse_start_pos[0] - mouse_end_pos[0]
+        dy = mouse_start_pos[1] - mouse_end_pos[1]
+        throw_angle = math.degrees(math.atan2(dy, dx))
+        phones.append(Phone(thrower_pos, throw_angle))
+        thrower =2
 
     if thrower == 0:
         screen.blit(stand_img, (thrower_pos[0] - stand_img.get_width() // 2, thrower_pos[1] - stand_img.get_height() // 2)) 
@@ -129,21 +150,25 @@ while running:
             runner[1]=1
 
     for phone in phones:
+        phone.move()
+        if phone.pos[1] < 0 or phone.pos[0] < 0 or phone.pos[0] > 800 or phone.pos[1]>600:
+            phones.remove(phone)
+
+
+    for phone in phones:
         for runner in runners:
             if phone.rect.colliderect(runner[0].rect):
+                score+=1
                 catch_sound.play()
                 runners_catch.append([runner[0],0])
                 phones.remove(phone)
                 runners.remove(runner)
 
-    for phone in phones:
-        phone.move()
-        if phone.pos[1] < 0 or phone.pos[0] < 0 or phone.pos[0] > 800:
-            phones.remove(phone)
-
+    
     for runner in runners:
         runner[0].move()
         if runner[0].pos[1] < 75:
+            neg_score+=1
             hit_sound.play()
             runners_hit.append([runner[0],0])
             runners.remove(runner)
@@ -166,9 +191,18 @@ while running:
             runners_catch.remove(caught)    
 
     if random.randint(0, 100) < 10 and len(runners)<3:
-        runner_pos = (random.randint(50,750), 600)
-        runners.append([Customer(runner_pos),1])
+        spawn_at = random.choice([random.randint(50,300),random.randint(500,750)])
+        if abs(spawn_at-last_spawned)>50 and abs(spawn_at-last_to_last_spawned)>50:
+            runner_pos = (spawn_at, 600)
+            runners.append([Customer(runner_pos),1])
+            last_to_last_spawned = last_spawned
+            last_spawned = spawn_at
 
+    if score+neg_score==25:
+        if score>20:
+            exec(open("rev.py").read())
+        else:
+            exec(open("factory.py").read())   
     pygame.display.flip()
     clock.tick(30)
 
