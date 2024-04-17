@@ -15,20 +15,26 @@ play_hover_sound = pygame.mixer.Sound("play_hover_sound.mp3")
 bg_audio_2 = pygame.mixer.Sound("../Assets/audio/scene2/scene2_audio.wav")
 bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
 caught_sound = pygame.mixer.Sound("../Assets/audio/scene2/caught.wav")
+caught_sound.set_volume(0.2)
 dead_sound = pygame.mixer.Sound("../Assets/audio/scene2/dead_sound.wav")
 bounce_sound = pygame.mixer.Sound("../Assets/audio/scene2/bounce_sound.mp3")
 hit_sound = pygame.mixer.Sound("../Assets/audio/scene3/hit.mp3")
 catch_sound = pygame.mixer.Sound("../Assets/audio/scene3/phone_catch.mp3")
+
+doom_sound = pygame.mixer.Sound("../Assets/audio/doom/doom.mp3")
+
+doom_phone = pygame.image.load("../Assets/sprites/doom/doom_phone.png")
 # Load the background image
 background = pygame.image.load("main.jpg")
 background = pygame.transform.scale(background, (800, 600))
 bg_game2 = pygame.image.load("factory bg.jpg")
 bg_game3 = pygame.image.load("bg_game3.png")
+bg_descent = pygame.image.load("../Assets/sprites/doom/doom1.png")
 
 # Load the font
 font = pygame.font.Font("play_font.ttf", 45)
 
-screen_name = "home page"
+screen_name = "descent"
 
 # Initial text size and button rectangle
 text_size = 55
@@ -113,6 +119,18 @@ class Customer:
         self.pos = (self.pos[0], self.pos[1] - self.speed)
         self.rect.center = self.pos
 
+class Doom_phone:
+    def __init__(self):
+        self.x = 400
+        self.y = 0
+        self.image = doom_phone
+        self.rect = self.image.get_rect(center=(self.x,self.y))
+        self.count=0
+
+    def move(self):
+        self.y += 1.2
+        self.rect.center = (self.x,self.y)  
+
 phones = []
 runners = []
 runners_hit = []
@@ -121,6 +139,9 @@ thrower = 0
 
 last_spawned = 0
 last_to_last_spawned = 0
+
+descent_spawned = False
+doom_phone_obj = 0
 
 # Game loop
 while True:
@@ -303,6 +324,12 @@ while True:
                 runner[1]=1
 
         for phone in phones:
+            phone.move()
+            if phone.pos[1] < 0 or phone.pos[0] < 0 or phone.pos[0] > 800 or phone.pos[1]>600:
+                phones.remove(phone)
+
+
+        for phone in phones:
             for runner in runners:
                 if phone.rect.colliderect(runner[0].rect):
                     score+=1
@@ -311,11 +338,7 @@ while True:
                     phones.remove(phone)
                     runners.remove(runner)
 
-        for phone in phones:
-            phone.move()
-            if phone.pos[1] < 0 or phone.pos[0] < 0 or phone.pos[0] > 800 or phone.pos[1]>600:
-                phones.remove(phone)
-
+        
         for runner in runners:
             runner[0].move()
             if runner[0].pos[1] < 75:
@@ -358,6 +381,24 @@ while True:
                 screen_name="page 1"   
                 score=0
                 neg_score=0   
+    
+    elif screen_name=="descent":
+        screen.blit(bg_descent,(0,0))
+        if descent_spawned:
+            if doom_phone_obj.y<255:
+                doom_phone_obj.move()
+                doom_phone_obj.count+=1
+                screen.blit(doom_phone_obj.image,doom_phone_obj.rect)
+            elif doom_phone_obj.count > 375:
+                screen_name="home page"
+            else:
+                screen.blit(doom_phone_obj.image,doom_phone_obj.rect)   
+                doom_phone_obj.count+=1 
+        else:
+            doom_phone_obj = Doom_phone()
+            screen.blit(doom_phone_obj.image,doom_phone_obj.rect)
+            descent_spawned = True
+            doom_sound.play()
 
 
     # Update the display
