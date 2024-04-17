@@ -22,14 +22,18 @@ class Soldier(pygame.sprite.Sprite):
         self.shout_frames = 0
         self.is_inverted = is_inverted
         self.worker_group = worker_group
+
+        self.dig_sound = pygame.mixer.Sound('../../Assets/audio/scene1/dig2.wav')
+        self.dig_sound.set_volume(0.5)
         
         for i in range(0, 13):
-            path = f"../Assets/sprites/scene1/s{i}.png"
+            path = f"../../Assets/sprites/scene1/s{i}.png"
             img = pygame.image.load(path).convert_alpha()
+            scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             if self.is_inverted == False:
-                sprite = img
+                sprite = scaled_img
             else:
-                sprite = pygame.transform.flip(img, True, False)
+                sprite = pygame.transform.flip(scaled_img, True, False)
             if i in range(0, 4):
                 self.walk_away.append(sprite)
             elif i in range(4, 10):
@@ -56,13 +60,13 @@ class Soldier(pygame.sprite.Sprite):
             self.move_towards()
         elif self.prev_state == 3 and self.curr_state == 2:
             for worker in self.worker_group:
-                if abs(worker.rect.centery -90 - self.rect.centery) <= 20:
+                if abs(worker.rect.centery -45 - self.rect.centery) <= 20:
                     print("touch")
                     worker.curr_state = 0
                 else:
                     print("no touch")
-                    print(f"Soldier rect: {self.rect.centerx}, {self.rect.centery}")
-                    print(f"Worker rect: {worker.rect.centerx}, {worker.rect.centery}")
+                    # print(f"Soldier rect: {self.rect.centerx}, {self.rect.centery}")
+                    # print(f"Worker rect: {worker.rect.centerx}, {worker.rect.centery}")
 
 
         # Update the sprite based on the image index
@@ -112,6 +116,7 @@ class Soldier(pygame.sprite.Sprite):
         else:
             self.curr_state = 3
             self.frame = 0
+            self.dig_sound.play()
             # print("curr_state: "+ str(self.curr_state))
             # print("frame: "+str(self.frame))
                     
@@ -121,6 +126,7 @@ class Soldier(pygame.sprite.Sprite):
         else:
             self.curr_state = 3
             self.frame = 0
+            self.dig_sound.play()
             # print("curr_state: "+ str(self.curr_state))
             # print("frame: "+str(self.frame))
                 
@@ -143,23 +149,25 @@ class Worker(pygame.sprite.Sprite):
         self.prev_state = -1
         
         for i in range(0, 4):
-            path = f"../Assets/sprites/scene1/w{i}.png"
+            path = f"../../Assets/sprites/scene1/w{i}.png"
             img = pygame.image.load(path).convert_alpha()
+            scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             if self.is_inverted == False:
-                sprite = img
+                sprite = scaled_img
             else:
-                sprite = pygame.transform.flip(img, True, False)
+                sprite = pygame.transform.flip(scaled_img, True, False)
             self.working.append(sprite)
         for i in range(2,-1,-1):
             self.working.append(self.working[i])        
         
         for i in range(0,3):
-            path = f"../Assets/sprites/scene1/t{i}.png"
+            path = f"../../Assets/sprites/scene1/t{i}.png"
             img = pygame.image.load(path).convert_alpha()
+            scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             if self.is_inverted == True:
-                sprite = img
+                sprite = scaled_img
             else:
-                sprite = pygame.transform.flip(img, True, False)
+                sprite = pygame.transform.flip(scaled_img, True, False)
             self.tired.append(sprite)   
         for i in range(1,-1,-1):
             self.tired.append(self.tired[i])
@@ -214,18 +222,31 @@ class Worker(pygame.sprite.Sprite):
 pygame.init()
 
 # Set up the screen
-screen = pygame.display.set_mode((1600, 1200))
-background = pygame.image.load("../Assets/sprites/scene1/bg.png")
+screen = pygame.display.set_mode((800, 600))
+background = pygame.image.load("../../Assets/sprites/scene1/bg.png")
 pygame.display.set_caption('Congo')
 clock = pygame.time.Clock()
+story_msg = pygame.mixer.Sound('../../Assets/audio/scene1/story13.wav')
+story_msg.play()
+bg_music = pygame.mixer.Sound('../../Assets/audio/scene1/happy1.wav')
+bg_music.set_volume(0.2)
+bg_music.play()
+# bg_music = pygame.mixer.Sound('')
+# bg_music.play(loops = -1)
 
+font = pygame.font.Font(None, 30)
+message = "Click on those tired bastards to keep them digging "
+text_surface = font.render(message, True, (255, 255, 255))
+text_rect = text_surface.get_rect()
+text_rect.centerx = screen.get_rect().centerx
+text_rect.top = 20 
 # Groups
 
 worker_group_left = pygame.sprite.Group()
 worker_group_right = pygame.sprite.Group()
 
-workers_left = [Worker(750,1000),Worker(750,800),Worker(750,600),Worker(750,400),Worker(750,200)]
-workers_right = [Worker(850,1000,is_inverted=True),Worker(850,800,is_inverted=True),Worker(850,600,is_inverted=True),Worker(850,400,is_inverted=True),Worker(850,200,is_inverted=True)]
+workers_left = [Worker(375,550),Worker(375,450),Worker(375,350),Worker(375,250),Worker(375,150)]
+workers_right = [Worker(425,550,is_inverted=True),Worker(425,450,is_inverted=True),Worker(425,350,is_inverted=True),Worker(425,250,is_inverted=True),Worker(425,150,is_inverted=True)]
 
 for worker in workers_left:
     worker_group_left.add(worker)
@@ -233,8 +254,8 @@ for worker in workers_right:
     worker_group_right.add(worker)
 
 soldier_group = pygame.sprite.Group()
-soldier_left = Soldier(400,1000,worker_group_left,is_inverted=True)
-soldier_right = Soldier(1200,1000,worker_group_right)
+soldier_left = Soldier(200,500,worker_group_left,is_inverted=True)
+soldier_right = Soldier(600,500,worker_group_right)
 soldier_group.add(soldier_left)
 soldier_group.add(soldier_right)
 
@@ -245,19 +266,25 @@ while True:
             exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             target_x, target_y = pygame.mouse.get_pos()
-            if target_x < 800:
+            if target_x < 400:
                 for worker in worker_group_left:
-                    if worker.rect.collidepoint(target_x, target_y):
-                        soldier_left.set_target(worker.rect.centerx , worker.rect.centery-90)
+                    larger_rect = worker.rect.inflate(100, 0)
+                    if larger_rect.collidepoint(target_x, target_y):
+                        soldier_left.set_target(worker.rect.centerx , worker.rect.centery-45)
+                        print("Target x: " + str(soldier_left.target_x))
+                        print("Target y: " + str(soldier_left.target_y))
             else:
                 for worker in worker_group_right:
-                    if worker.rect.collidepoint(target_x, target_y):
-                        soldier_right.set_target(worker.rect.centerx, worker.rect.centery-90)
+                    larger_rect = worker.rect.inflate(100, 0)
+                    if larger_rect.collidepoint(target_x, target_y):
+                        soldier_right.set_target(worker.rect.centerx, worker.rect.centery-45)
     
     # screen.fill((255, 255, 255))
     screen.blit(background,(0,0))
     soldier_group.draw(screen)    
     soldier_group.update()
+
+    screen.blit(text_surface, text_rect)
 
     worker_group_left.draw(screen)
     worker_group_left.update()
