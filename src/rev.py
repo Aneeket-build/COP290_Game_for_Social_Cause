@@ -38,31 +38,31 @@ play_button_rect = play_button.get_rect(center=(400, 400))
 
 pause = 0
 
-sprite_img_fall = pygame.image.load("fall.png")
-trampoline_img = pygame.image.load("trampoline.png")
-sprite_img_bounce = pygame.image.load("bounce.png")
-sprite_img_stand = pygame.image.load("stand.png")
-sprite1 = pygame.image.load("fall-turn1.png")
-sprite_dead = pygame.image.load("dead.png")
-sprite_fall1 = pygame.image.load("fall1.png")
-sprite_fall2 = pygame.image.load("fall2.png")
-sprite_fall3 = pygame.image.load("fall3.png")
-sprite_fall4 = pygame.image.load("fall4.png")
+sprite_img_fall = pygame.image.load("../Assets/sprites/scene2/fall.png")
+trampoline_img = pygame.image.load("../Assets/sprites/scene2/trampoline.png")
+sprite_img_bounce = pygame.image.load("../Assets/sprites/scene2/bounce.png")
+sprite_img_stand = pygame.image.load("../Assets/sprites/scene2/stand.png")
+sprite1 = pygame.image.load("../Assets/sprites/scene2/fall-turn1.png")
+sprite_dead = pygame.image.load("../Assets/sprites/scene2/dead.png")
+sprite_fall1 = pygame.image.load("../Assets/sprites/scene2/fall1.png")
+sprite_fall2 = pygame.image.load("../Assets/sprites/scene2/fall2.png")
+sprite_fall3 = pygame.image.load("../Assets/sprites/scene2/fall3.png")
+sprite_fall4 = pygame.image.load("../Assets/sprites/scene2/fall4.png")
 
-stand_img = pygame.image.load('thrower/img5.png')
-throwup = pygame.image.load('thrower/img2.png')
-throwdown = pygame.image.load('thrower/img3.png')
-thrown = pygame.image.load('thrower/img4.png')
-pickup = pygame.image.load('thrower/img1.png')
-phone_img = pygame.image.load('phone.png')
-runner1 = pygame.image.load('catcher/run1.png')
-runner2 = pygame.image.load('catcher/run2.png')
-runner3 = pygame.image.load('catcher/run3.png')
-runner4 = pygame.image.load('catcher/run4.png')
-runner5 = pygame.image.load('catcher/run5.png')
-runner6 = pygame.image.load('catcher/run6.png')
-runner_hit = pygame.image.load('catcher/hit.png')
-runner_catch = pygame.image.load('catcher/catch.png')
+stand_img = pygame.image.load('../Assets/sprites/scene3/thrower/img5.png')
+throwup = pygame.image.load('../Assets/sprites/scene3/thrower/img2.png')
+throwdown = pygame.image.load('../Assets/sprites/scene3/thrower/img3.png')
+thrown = pygame.image.load('../Assets/sprites/scene3/thrower/img4.png')
+pickup = pygame.image.load('../Assets/sprites/scene3/thrower/img1.png')
+phone_img = pygame.image.load('../Assets/sprites/scene3/phone.png')
+runner1 = pygame.image.load('../Assets/sprites/scene3/catcher/run1.png')
+runner2 = pygame.image.load('../Assets/sprites/scene3/catcher/run2.png')
+runner3 = pygame.image.load('../Assets/sprites/scene3/catcher/run3.png')
+runner4 = pygame.image.load('../Assets/sprites/scene3/catcher/run4.png')
+runner5 = pygame.image.load('../Assets/sprites/scene3/catcher/run5.png')
+runner6 = pygame.image.load('../Assets/sprites/scene3/catcher/run6.png')
+runner_hit = pygame.image.load('../Assets/sprites/scene3/catcher/hit.png')
+runner_catch = pygame.image.load('../Assets/sprites/scene3/catcher/catch.png')
 
 # Set up the game objects
 sprites = []
@@ -236,7 +236,7 @@ while True:
                 screen.blit(sprite_img_fall, sprite_rect[0])
         screen.blit(trampoline_img, trampoline_rect)
         if score+neg_score==8:
-            if score>6:
+            if score>5:
                 screen_name="game3"
                 score=0
                 neg_score=0
