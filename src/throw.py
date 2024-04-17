@@ -200,8 +200,10 @@ while running:
 
     if score+neg_score==25:
         if score>20:
+            running = False
             exec(open("rev.py").read())
         else:
+            running = False
             exec(open("factory.py").read())   
     pygame.display.flip()
     clock.tick(30)

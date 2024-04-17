@@ -51,8 +51,9 @@ def create_sprite():
 
 bg_audio_2.play()
 
+running = True
 # Game loop
-while True:
+while running:
     screen.blit(bg_game2, (0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -144,8 +145,10 @@ while True:
 
     if score+neg_score==8:
         if score>5:
+            running = False
             exec(open("throw.py").read())
         else:
+            running = False
             exec(open("rev.py").read())    
     
 

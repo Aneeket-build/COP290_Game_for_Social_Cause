@@ -32,7 +32,9 @@ class Doom_phone:
 descent_spawned = False
 doom_phone_obj = 0
 
-while True:
+running = True
+
+while running:
     screen.blit(bg_descent,(0,0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -45,6 +47,7 @@ while True:
             doom_phone_obj.count+=1
             screen.blit(doom_phone_obj.image,doom_phone_obj.rect)
         elif doom_phone_obj.count > 375:
+            running = False
             exec(open("rev.py").read())
         else:
             screen.blit(doom_phone_obj.image,doom_phone_obj.rect)   
