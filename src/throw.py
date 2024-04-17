@@ -2,7 +2,6 @@ import pygame
 import math
 import random
 
-# Initialize Pygame
 pygame.init()
 
 bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
@@ -12,11 +11,9 @@ hit_sound = pygame.mixer.Sound("../Assets/audio/scene3/hit.mp3")
 catch_sound = pygame.mixer.Sound("../Assets/audio/scene3/phone_catch.mp3")
 catch_sound.set_volume(0.5)
 
-bg_game3 = pygame.image.load("bg_game3.png")
-# Set up the display
+bg_game3 = pygame.image.load("../Assets/sprites/scene3/bg_game3.png")
 screen = pygame.display.set_mode((800, 600))
 
-# Load images
 stand_img = pygame.image.load('../Assets/sprites/scene3/thrower/img5.png')
 throwup = pygame.image.load('../Assets/sprites/scene3/thrower/img2.png')
 throwdown = pygame.image.load('../Assets/sprites/scene3/thrower/img3.png')
@@ -44,7 +41,6 @@ thrower_pos = (400, 75)
 arm_stretched = False
 throw_angle = 0
 
-# Rock class
 class Phone:
     def __init__(self, pos, angle):
         self.pos = pos
@@ -59,7 +55,6 @@ class Phone:
         self.pos = (self.pos[0] + dx, self.pos[1] + dy)
         self.rect.center = self.pos
 
-# Enemy class
 class Customer:
     def __init__(self, pos):
         self.pos = pos
@@ -71,7 +66,6 @@ class Customer:
         self.pos = (self.pos[0], self.pos[1] - self.speed)
         self.rect.center = self.pos
 
-# Game loop
 phones = []
 runners = []
 runners_hit = []
@@ -192,7 +186,7 @@ while running:
 
     if random.randint(0, 100) < 10 and len(runners)<3:
         spawn_at = random.choice([random.randint(50,300),random.randint(500,750)])
-        if abs(spawn_at-last_spawned)>50 and abs(spawn_at-last_to_last_spawned)>50:
+        if abs(spawn_at-last_spawned)>100 and abs(spawn_at-last_to_last_spawned)>100:
             runner_pos = (spawn_at, 600)
             runners.append([Customer(runner_pos),1])
             last_to_last_spawned = last_spawned

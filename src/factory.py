@@ -2,10 +2,8 @@ import pygame
 import random
 import sys
 
-# Initialize Pygame
 pygame.init()
 
-# Set up the display
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
@@ -16,7 +14,7 @@ caught_sound.set_volume(0.2)
 dead_sound = pygame.mixer.Sound("../Assets/audio/scene2/dead_sound.wav")
 bounce_sound = pygame.mixer.Sound("../Assets/audio/scene2/bounce_sound.mp3")
 
-bg_game2 = pygame.image.load("factory bg.jpg")
+bg_game2 = pygame.image.load("../Assets/sprites/scene2/factory bg.jpg")
 
 sprite_img_fall = pygame.image.load("../Assets/sprites/scene2/fall.png")
 trampoline_img = pygame.image.load("../Assets/sprites/scene2/trampoline.png")
@@ -29,7 +27,6 @@ sprite_fall2 = pygame.image.load("../Assets/sprites/scene2/fall2.png")
 sprite_fall3 = pygame.image.load("../Assets/sprites/scene2/fall3.png")
 sprite_fall4 = pygame.image.load("../Assets/sprites/scene2/fall4.png")
 
-# Set up the game objects
 sprites = []
 trampoline_rect = trampoline_img.get_rect(midbottom=(WIDTH // 2, HEIGHT))
 
@@ -52,7 +49,7 @@ def create_sprite():
 bg_audio_2.play()
 
 running = True
-# Game loop
+
 while running:
     screen.blit(bg_game2, (0, 0))
     for event in pygame.event.get():
@@ -66,7 +63,6 @@ while running:
     if keys[pygame.K_RIGHT] and trampoline_rect.x< (WIDTH-trampoline_rect.width):
         trampoline_rect.x += trampoline_speed
 
-    # Update sprite positions
     for sprite_rect in sprites:
         if sprite_rect[1]==2:
             sprite_rect[0].y += ((2*sprite_rect[2]+1)/10)
@@ -113,11 +109,10 @@ while running:
             else:
                 sprites.remove(sprite_rect)
                 sprite_rect[3] = 0    
-    # Generate a new sprite if needed
+
     if len(sprites) < 2:
         sprites.append([create_sprite(),-1,3,0])
 
-    # Draw game objects
     for sprite_rect in sprites:
         if sprite_rect[1]==1:
             if sprite_rect[2]<=10 or sprite_rect[2]>=500:
