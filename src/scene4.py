@@ -152,8 +152,8 @@ class Watergirl(pygame.sprite.Sprite):
 
         self.working_frames = 0
 
-        self.wash_sound = pygame.mixer.Sound('../Assets/audio/scene4/wash2.wav')
-        self.wash_sound.set_volume(0.5)
+        self.wash_sound = pygame.mixer.Sound('../Assets/audio/scene4/wash3.wav')
+        self.wash_sound.set_volume(0.2)
 
         for i in range(1, 7):
             path = f"../Assets/sprites/scene4/watergirl/wg{i}.png"
@@ -209,8 +209,8 @@ class Fireboy(pygame.sprite.Sprite):
 
         self.working_frames = 0
 
-        self.cough_sound = pygame.mixer.Sound('../Assets/audio/scene4/cough31.mp3')
-        self.cough_sound.set_volume(0.5)
+        self.cough_sound = pygame.mixer.Sound('../Assets/audio/scene4/fire_whoosh.mp3')
+        self.cough_sound.set_volume(0.2)
 
         for i in range(1, 15):
             path = f"../Assets/sprites/scene4/fireboy/b{i}.png"
