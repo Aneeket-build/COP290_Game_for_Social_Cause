@@ -2,6 +2,11 @@ import pygame
 import math
 import random
 
+def execute_failure():
+    with open('failure.py', 'r') as file:
+        code = file.read()
+    exec(code)
+
 pygame.init()
 
 bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
@@ -35,7 +40,6 @@ text_surface2 = font.render(message2,True,(255,255,255))
 text_rect2 = text_surface2.get_rect()
 text_rect2.centerx = screen.get_rect().centerx
 text_rect2.top = 150
-
 
 thrower_pos = (400, 75)
 arm_stretched = False
@@ -197,8 +201,9 @@ while running:
             running = False
             exec(open("rev.py").read())
         else:
-            running = False
-            exec(open("factory.py").read())   
+            execute_failure()
+            score=0
+            neg_score=0  
     pygame.display.flip()
     clock.tick(30)
 
