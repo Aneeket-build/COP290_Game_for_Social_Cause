@@ -2,7 +2,6 @@ import pygame
 import sys
 import math
 from random import randint
-import subprocess
 
 def execute_level(file_name):
     with open(file_name, 'r') as file:
@@ -52,18 +51,23 @@ font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size2
 free_play_button = font2.render(free_play_text,True,(0,0,0))
 free_play_button_rect = free_play_button.get_rect(center=(420,415))
 
+start_time = pygame.time.get_ticks()
+
 while running:
+    
+    current_time = pygame.time.get_ticks()
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-    if event.type == pygame.MOUSEMOTION:
+    if event.type == pygame.MOUSEMOTION and (current_time-start_time)>1000:
         if play_button_rect.collidepoint(event.pos):
             text_size = 30
             if(pause==0):
                 play_hover_sound.play()
                 pause+=1
-        elif free_play_button_rect.collidepoint(event.pos):
+        elif free_play_button_rect.collidepoint(event.pos) and (current_time-start_time)>1000:
             text_size2 = 27
             if(pause==0):
                 locked_sound.play()
@@ -73,15 +77,17 @@ while running:
             text_size2 = 25
             pause=0
     if event.type == pygame.MOUSEBUTTONDOWN:
-        if play_button_rect.collidepoint(event.pos):
-            story_msg.play()
-            execute_level("scene1.py")
-            bg_audio2.play()
-            execute_level("factory.py")
-            bg_audio3.play()
-            execute_level("throw.py")
-            bg_audio4.play()
-            execute_level("scene4.py")
+        if play_button_rect.collidepoint(event.pos) and (current_time-start_time)>1000:
+            # execute_level("welcome.py")
+            # story_msg.play()
+            # execute_level("scene1.py")
+            # bg_audio2.play()
+            # execute_level("factory.py")
+            # bg_audio3.play()
+            # execute_level("throw.py")
+            # bg_audio4.play()
+            # execute_level("scene4.py")
+            execute_level("cycle.py")
             execute_level("doom.py")
             exec(open("unlocked_home_page.py").read())
             
