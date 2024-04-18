@@ -12,7 +12,7 @@ class Face(pygame.sprite.Sprite):
         self.state = 0
         self.speaking_frames = 0
         self.blinking_frames = 0
-
+        
         for i in range(1,6):
             path = path = f"../Assets/sprites/face/f{i}.png"
             img = pygame.image.load(path).convert_alpha()
@@ -33,9 +33,9 @@ class Face(pygame.sprite.Sprite):
 
         # Move to the next frame
         if self.state == 0:
-            print("wow")
+            # print("wow")
             if self.frame < 3:
-                if self.speaking_frames < 152:
+                if self.speaking_frames < 118:
                     self.frame += 0.2
                     self.speaking_frames += 1
                 else: 
@@ -59,7 +59,7 @@ clock = pygame.time.Clock()
 
 faces = pygame.sprite.GroupSingle()
 faces.add(Face(521,108))
-bg_music = pygame.mixer.Sound('../Assets/audio/face/hello_consumer.wav')
+bg_music = pygame.mixer.Sound('../Assets/audio/face/failure.wav')
 bg_music.set_volume(0.2)
 bg_music.play()
 

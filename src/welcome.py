@@ -33,7 +33,7 @@ class Face(pygame.sprite.Sprite):
 
         # Move to the next frame
         if self.state == 0:
-            print("wow")
+            # print("wow")
             if self.frame < 3:
                 if self.speaking_frames < 152:
                     self.frame += 0.2
