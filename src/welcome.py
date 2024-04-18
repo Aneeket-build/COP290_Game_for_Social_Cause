@@ -63,12 +63,21 @@ bg_music = pygame.mixer.Sound('../Assets/audio/face/hello_consumer1.wav')
 bg_music.set_volume(0.2)
 bg_music.play()
 
-while True:
+start_time = pygame.time.get_ticks()
+
+running = True
+
+while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
     screen.blit(background,(0,0))
+
+    current_time = pygame.time.get_ticks()
+
+    if (current_time-start_time)>7000:
+        running = False
 
     faces.draw(screen)
     faces.update()

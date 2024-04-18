@@ -45,6 +45,8 @@ font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size2
 free_play_button = font2.render(free_play_text,True,(0,0,0))
 free_play_button_rect = free_play_button.get_rect(center=(400,415))
 
+start_time = pygame.time.get_ticks()
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -65,8 +67,13 @@ while running:
             text_size = 25
             text_size2 = 25
             pause=0
+            
+    current_time = pygame.time.get_ticks()  
+            
     if event.type == pygame.MOUSEBUTTONDOWN:
-        if play_button_rect.collidepoint(event.pos):
+        if play_button_rect.collidepoint(event.pos) and (current_time-start_time)>2000:
+            print("hi")
+            execute_level("welcome.py")
             story_msg.play()
             execute_level("scene1.py")
             bg_audio2.play()
@@ -75,8 +82,9 @@ while running:
             execute_level("throw.py")
             bg_audio4.play()
             execute_level("scene4.py")
+            execute_level("cycle.py")
             execute_level("doom.py")
-        elif free_play_button_rect.collidepoint(event.pos):
+        elif free_play_button_rect.collidepoint(event.pos) and (current_time-start_time)>2000:
             running = False    
             exec(open("choose_game.py").read())
 
