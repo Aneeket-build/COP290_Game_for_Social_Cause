@@ -1,8 +1,7 @@
 import pygame
-import math
 from sys import exit
 from random import randint, choice
-from enum import Enum
+import time
 
 class Soldier(pygame.sprite.Sprite):
     def __init__(self, x, y, worker_group, is_inverted=False):
@@ -248,6 +247,8 @@ worker_group_right = pygame.sprite.Group()
 workers_left = [Worker(375,550),Worker(375,450),Worker(375,350),Worker(375,250),Worker(375,150)]
 workers_right = [Worker(425,550,is_inverted=True),Worker(425,450,is_inverted=True),Worker(425,350,is_inverted=True),Worker(425,250,is_inverted=True),Worker(425,150,is_inverted=True)]
 
+workers_combined = workers_left + workers_right
+
 for worker in workers_left:
     worker_group_left.add(worker)
 for worker in workers_right:
@@ -259,7 +260,14 @@ soldier_right = Soldier(600,500,worker_group_right)
 soldier_group.add(soldier_left)
 soldier_group.add(soldier_right)
 
+start_time = time.time()
+target_time = 60
+
 while True:
+
+    current_time = time.time()
+    elapsed_time = current_time - start_time
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -279,6 +287,10 @@ while True:
                     if larger_rect.collidepoint(target_x, target_y):
                         soldier_right.set_target(worker.rect.centerx, worker.rect.centery-45)
     
+    tired_count = 0
+    for workers in workers_combined:
+        
+
     # screen.fill((255, 255, 255))
     screen.blit(background,(0,0))
     soldier_group.draw(screen)    
