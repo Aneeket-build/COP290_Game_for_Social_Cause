@@ -27,6 +27,7 @@ clock = pygame.time.Clock()
 
 running = True
 
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -44,7 +45,7 @@ while running:
     if event.type == pygame.MOUSEBUTTONDOWN:
         if play_button_rect.collidepoint(event.pos):
             running = False
-            exec(open("factory.py").read())
+            exec(open("mining.py").read())
 
     screen.blit(background, (0, 0))
 
