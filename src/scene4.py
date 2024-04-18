@@ -4,6 +4,11 @@ from sys import exit
 from random import randint
 import time
 
+def execute_failure():
+    with open('failure.py', 'r') as file:
+        code = file.read()
+    exec(code)
+
 fallen_objects = 0
 
 class Fireman(pygame.sprite.Sprite):
@@ -471,7 +476,7 @@ motherboard_group = pygame.sprite.Group()
 chemical_group = pygame.sprite.Group()
 
 story_msg = pygame.mixer.Sound('../Assets/audio/scene4/scene4_audio.wav')
-story_msg.play()
+# story_msg.play()
 # bg_music = pygame.mixer.Sound('../Assets/audio/scene4/happy1.wav')
 # bg_music.set_volume(0.2)
 # bg_music.play()
@@ -484,7 +489,9 @@ count = 0
 message_over = False
 start_time = time.time()
 
-while True:
+running = True
+
+while running:
     current_time = time.time()
     elapsed_time = current_time - start_time
     if elapsed_time > 32:
@@ -535,9 +542,22 @@ while True:
             elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 if chemical.dragging:
                     chemical.dragging = False   
-    if (message_over == True and fallen_objects > 20):
-        pygame.quit()
-        exit()
+    if message_over == True:
+        if fallen_objects > 10:
+            execute_failure()
+            fallen_objects=0
+            message_over=False
+            start_time = time.time()
+            for broken_phone in broken_phone_group:
+                broken_phone.kill()
+            for motherboard in motherboard_group:
+                motherboard.kill()
+            for flask in flask_group:
+                flask.kill()
+            for chemical in chemical_group:
+                chemical.kill()
+        else:
+            running = False
 
     screen.blit(background,(0,0))
 

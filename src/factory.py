@@ -50,8 +50,9 @@ text_rect = text_surface.get_rect()
 text_rect.centerx = screen.get_rect().centerx
 text_rect.top = 15
 
-def create_sprite():
-    return sprite_img_fall.get_rect(topleft=(random.randint(75, WIDTH - sprite_img_fall.get_width()-75), 140-sprite_img_fall.get_height()))
+# def create_sprite():
+#     global sprite_img_fall
+#     return sprite_img_fall.get_rect(topleft=(random.randint(75, WIDTH - sprite_img_fall.get_width()-75), 140-sprite_img_fall.get_height()))
 
 running = True
 
@@ -116,7 +117,8 @@ while running:
                 sprite_rect[3] = 0    
 
     if len(sprites) < 2:
-        sprites.append([create_sprite(),-1,3,0])
+        sprites.append([sprite_img_fall.get_rect(topleft=(random.randint(75, WIDTH - sprite_img_fall.get_width()-75), 140-sprite_img_fall.get_height()))
+,-1,3,0])
 
     for sprite_rect in sprites:
         if sprite_rect[1]==1:
@@ -150,6 +152,7 @@ while running:
             # exec(open("throw.py").read())
         else:
             execute_failure()
+            sprites = []
             score=0
             neg_score=0  
     

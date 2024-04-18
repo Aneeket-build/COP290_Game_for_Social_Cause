@@ -3,6 +3,12 @@ from sys import exit
 from random import randint, choice
 import time
 
+def execute_failure():
+    with open('failure.py', 'r') as file:
+        code = file.read()
+    exec(code)
+
+
 class Soldier(pygame.sprite.Sprite):
     def __init__(self, x, y, worker_group, is_inverted=False):
         super().__init__()
@@ -226,10 +232,10 @@ background = pygame.image.load("../Assets/sprites/scene1/bg.png")
 pygame.display.set_caption('Congo')
 clock = pygame.time.Clock()
 story_msg = pygame.mixer.Sound('../Assets/audio/scene1/story13.wav')
-story_msg.play()
+# story_msg.play()
 bg_music = pygame.mixer.Sound('../Assets/audio/scene1/happy1.wav')
 bg_music.set_volume(0.2)
-bg_music.play()
+# bg_music.play()
 # bg_music = pygame.mixer.Sound('')
 # bg_music.play(loops = -1)
 
@@ -263,7 +269,9 @@ soldier_group.add(soldier_right)
 start_time = time.time()
 message_over = False
 
-while True:
+running = True
+
+while running:
     current_time = time.time()
     elapsed_time = current_time - start_time
     if elapsed_time > 38:
@@ -291,9 +299,16 @@ while True:
     tired_count = 0
     for worker in workers_combined:
         tired_count += worker.curr_state
-    if tired_count > 4 and message_over == True:
-        pygame.quit()
-        exit()
+    if message_over == True:
+        if tired_count > 4 :
+            execute_failure()
+            for worker in workers_combined:
+                worker.curr_state = 0
+                worker.frame = randint(0,3)
+            message_over=False
+            start_time = time.time()
+        else:
+            running = False        
         
     # screen.fill((255, 255, 255))
     screen.blit(background,(0,0))

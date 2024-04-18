@@ -1,10 +1,13 @@
 import pygame
 import sys
+import math
+from random import randint
+import subprocess
 
 def execute_level(file_name):
     with open(file_name, 'r') as file:
         code = file.read()
-    exec(code)
+    exec(code,globals(),locals())  
 
 pygame.init()
 
@@ -17,6 +20,8 @@ locked_sound = pygame.mixer.Sound("../Assets/audio/main_page/locked_sound.wav")
 story_msg = pygame.mixer.Sound('../Assets/audio/scene1/story13.wav')
 bg_audio2 = pygame.mixer.Sound("../Assets/audio/scene2/scene2_audio.wav")
 bg_audio3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
+bg_audio4 = pygame.mixer.Sound('../Assets/audio/scene4/scene4_audio.wav')
+
 
 
 background = pygame.image.load("../Assets/sprites/main_page/main.jpg")
@@ -69,12 +74,17 @@ while running:
             pause=0
     if event.type == pygame.MOUSEBUTTONDOWN:
         if play_button_rect.collidepoint(event.pos):
-            # story_msg.play()
-            # execute_level("scene1.py")
+            story_msg.play()
+            execute_level("scene1.py")
             bg_audio2.play()
             execute_level("factory.py")
             bg_audio3.play()
             execute_level("throw.py")
+            bg_audio4.play()
+            execute_level("scene4.py")
+            execute_level("doom.py")
+            exec(open("unlocked_home_page.py").read())
+            
             
 
     screen.blit(background, (0, 0))

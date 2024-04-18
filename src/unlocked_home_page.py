@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Game Title")
 
 play_hover_sound = pygame.mixer.Sound("../Assets/audio/main_page/play_hover_sound.mp3")
-story_msg = pygame.mixer.Sound('../../Assets/audio/scene1/story13.wav')
+story_msg = pygame.mixer.Sound('../Assets/audio/scene1/story13.wav')
 
 
 background = pygame.image.load("../Assets/sprites/main_page/main.jpg")
@@ -27,6 +27,12 @@ clock = pygame.time.Clock()
 
 running = True
 
+font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size)
+play_button = font.render(play_text, True, (0, 0, 0))
+play_button_rect = play_button.get_rect(center=(400, 350))
+font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size2)
+free_play_button = font2.render(free_play_text,True,(0,0,0))
+free_play_button_rect = free_play_button.get_rect(center=(400,415))
 
 while running:
     for event in pygame.event.get():
@@ -55,6 +61,7 @@ while running:
             exec(open("scene1.py").read())
         elif free_play_button_rect.collidepoint(event.pos):
             running = False    
+            exec(open("choose_game.py").read())
 
     screen.blit(background, (0, 0))
 

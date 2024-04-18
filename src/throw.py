@@ -50,7 +50,7 @@ class Phone:
         self.pos = pos
         self.angle = angle
         self.speed = 20
-        self.image = pygame.transform.rotate(phone_img, angle)
+        self.image = pygame.transform.rotate( pygame.image.load('../Assets/sprites/scene3/phone.png'), angle)
         self.rect = self.image.get_rect(center=pos)
 
     def move(self):
@@ -63,7 +63,7 @@ class Customer:
     def __init__(self, pos):
         self.pos = pos
         self.speed = 4
-        self.image1 = runner1
+        self.image1 = pygame.image.load('../Assets/sprites/scene3/catcher/run1.png')
         self.rect = self.image1.get_rect(center=pos)
 
     def move(self):
@@ -204,7 +204,12 @@ while running:
             execute_failure()
             score=0
             neg_score=0  
+            phones = []
+            runners = []
+            runners_hit = []
+            runners_catch = []
+            last_spawned = 0
+            last_to_last_spawned = 0
+            
     pygame.display.flip()
     clock.tick(30)
-
-pygame.quit()

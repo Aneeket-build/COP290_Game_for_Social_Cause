@@ -27,6 +27,26 @@ clock = pygame.time.Clock()
 
 running = True
 
+font1 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size1)
+play_button1 = font1.render(text1, True, (0, 0, 0))
+play_button_rect1 = play_button1.get_rect(center=(400, 240))
+font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size2)
+play_button2 = font2.render(text2, True, (0, 0, 0))
+play_button_rect2 = play_button2.get_rect(center=(400, 300))
+font3 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size3)
+play_button3 = font3.render(text3, True, (0, 0, 0))
+play_button_rect3 = play_button3.get_rect(center=(400, 360))
+font4 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size4)
+play_button4 = font4.render(text4, True, (0, 0, 0))
+play_button_rect4 = play_button4.get_rect(center=(400, 420))
+
+head_font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", 35)
+head_text = head_font.render("Choose",True,(255,0,0))
+head_text_rect = head_text.get_rect(center=(400,135))
+head_text2 = head_font.render("Game",True,(255,0,0))
+head_text_rect2 = head_text2.get_rect(center=(400,175))
+
+start_time = pygame.time.get_ticks()
 
 while running:
     for event in pygame.event.get():
@@ -60,7 +80,9 @@ while running:
             text_size3 = 25
             text_size4 = 25
             pause=0
-    if event.type == pygame.MOUSEBUTTONDOWN:
+            
+    current_time = pygame.time.get_ticks()        
+    if event.type == pygame.MOUSEBUTTONDOWN and (current_time-start_time)>2000:
         if play_button_rect1.collidepoint(event.pos):
             running = False
             exec(open("scene1.py").read())

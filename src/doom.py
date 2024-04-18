@@ -20,7 +20,7 @@ class Doom_phone:
     def __init__(self):
         self.x = 400
         self.y = 0
-        self.image = doom_phone
+        self.image = pygame.image.load("../Assets/sprites/doom/doom_phone.png")
         self.rect = self.image.get_rect(center=(self.x,self.y))
         self.count=0
 
@@ -48,7 +48,6 @@ while running:
             screen.blit(doom_phone_obj.image,doom_phone_obj.rect)
         elif doom_phone_obj.count > 375:
             running = False
-            exec(open("rev.py").read())
         else:
             screen.blit(doom_phone_obj.image,doom_phone_obj.rect)   
             doom_phone_obj.count+=1 
