@@ -2,7 +2,6 @@ import pygame
 import sys
 import math
 from random import randint
-import subprocess
 
 def execute_level(file_name):
     with open(file_name, 'r') as file:

@@ -1,6 +1,12 @@
 import pygame
 import sys
 
+def execute_level(file_name):
+    with open(file_name, 'r') as file:
+        code = file.read()
+    exec(code,globals(),locals())  
+
+
 pygame.init()
 
 WIDTH, HEIGHT = 800, 600
@@ -85,16 +91,20 @@ while running:
     if event.type == pygame.MOUSEBUTTONDOWN and (current_time-start_time)>2000:
         if play_button_rect1.collidepoint(event.pos):
             running = False
-            exec(open("scene1.py").read())
+            execute_level("scene1.py")
+            exec(open("unlocked_home_page.py").read())
         elif play_button_rect2.collidepoint(event.pos):
             running = False 
-            exec(open("factory.py").read())
+            execute_level("factory.py")
+            exec(open("unlocked_home_page.py").read())
         elif play_button_rect3.collidepoint(event.pos):
             running = False 
-            exec(open("throw.py").read())
+            execute_level("throw.py")
+            exec(open("unlocked_home_page.py").read())
         elif play_button_rect4.collidepoint(event.pos):
             running = False 
-            exec(open("scene4.py").read())
+            execute_level("scene4.py")
+            exec(open("unlocked_home_page.py").read())
 
     screen.blit(background, (0, 0))
 
