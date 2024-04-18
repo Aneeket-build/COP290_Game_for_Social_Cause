@@ -44,6 +44,7 @@ class Fireman(pygame.sprite.Sprite):
         self.frame = 0
         self.image = self.idle[self.frame]
         self.rect = self.image.get_rect()
+        self.rect.inflate(30,30)
         self.rect.bottomright = (self.x, self.y)
     
     def update(self):
@@ -110,6 +111,7 @@ class SiliconWoman(pygame.sprite.Sprite):
         self.frame = 0
         self.image = self.idle
         self.rect = self.image.get_rect()
+        self.rect.inflate(30,30)
         self.rect.bottomleft = (self.x, self.y)
     
     def update(self):
@@ -165,6 +167,7 @@ class Watergirl(pygame.sprite.Sprite):
         self.frame = 0
         self.image = self.idle
         self.rect = self.image.get_rect()
+        self.rect.inflate(30,30)
         self.rect.bottomright = (self.x, self.y)
     
     def update(self):
@@ -221,6 +224,7 @@ class Fireboy(pygame.sprite.Sprite):
         self.frame = 0
         self.image = self.idle[self.frame]
         self.rect = self.image.get_rect()
+        self.rect.inflate(30,30)
         self.rect.bottomleft = (self.x, self.y)
     
     def update(self):
@@ -266,13 +270,14 @@ class BrokenPhone(pygame.sprite.Sprite):
         self.motion_x = x
         self.motion_y = y
 
-        self. speed = 5
+        self.speed = 3.5
         self.worker_group = worker_goup
 
         img = pygame.image.load("../Assets/sprites/scene4/junk/broken_phone.png").convert_alpha()
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
+        self.rect.inflate(10,10)
         self.rect.center = (self.x, self.y)
 
         self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
@@ -307,13 +312,14 @@ class Flask(pygame.sprite.Sprite):
         self.motion_x = x
         self.motion_y = y
 
-        self. speed = 5
+        self. speed = 3.5
         self.worker_group = worker_goup
 
         img = pygame.image.load("../Assets/sprites/scene4/junk/flask.png").convert_alpha()
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
+        self.rect.inflate(10,10)
         self.rect.center = (self.x, self.y)
 
         self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
@@ -348,13 +354,14 @@ class Motherboard(pygame.sprite.Sprite):
         self.motion_x = x
         self.motion_y = y
 
-        self. speed = 5
+        self.speed = 3.5
         self.worker_group = worker_goup
 
         img = pygame.image.load("../Assets/sprites/scene4/junk/motherboard.png").convert_alpha()
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
+        self.rect.inflate(10,10)
         self.rect.center = (self.x, self.y)
 
         self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
@@ -389,13 +396,14 @@ class Chemical(pygame.sprite.Sprite):
         self.motion_x = x
         self.motion_y = y
 
-        self. speed = 5
+        self. speed = 3.5
         self.worker_group = worker_goup
 
         img = pygame.image.load("../Assets/sprites/scene4/junk/yellow_chem.png").convert_alpha()
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
+        self.rect.inflate(10,10)
         self.rect.center = (self.x, self.y)
 
         self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
@@ -426,7 +434,7 @@ class Line(pygame.sprite.Sprite):
         super().__init__()
         self.x = x
         self.y = y
-        self.speed = 5
+        self.speed = 3.5
 
         img = pygame.image.load("../Assets/sprites/scene4/line.png").convert_alpha()
         self.image = img
