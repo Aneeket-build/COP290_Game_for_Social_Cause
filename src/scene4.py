@@ -565,6 +565,7 @@ while running:
             for chemical in chemical_group:
                 chemical.kill()
         else:
+            pygame.mixer.stop()
             running = False
 
     screen.blit(background,(0,0))

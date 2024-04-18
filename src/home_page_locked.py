@@ -78,14 +78,14 @@ while running:
             pause=0
     if event.type == pygame.MOUSEBUTTONDOWN:
         if play_button_rect.collidepoint(event.pos) and (current_time-start_time)>1000:
-            execute_level("welcome.py")
-            story_msg.play()
-            execute_level("scene1.py")
-            bg_audio2.play()
-            execute_level("factory.py")
-            bg_audio3.play()
-            execute_level("throw.py")
-            bg_audio4.play()
+            # execute_level("welcome.py")
+            # story_msg.play()
+            # execute_level("scene1.py")
+            # bg_audio2.play()
+            # execute_level("factory.py")
+            # bg_audio3.play()
+            # execute_level("throw.py")
+            # bg_audio4.play()
             execute_level("scene4.py")
             execute_level("cycle.py")
             execute_level("doom.py")
