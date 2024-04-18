@@ -2,6 +2,9 @@ import pygame
 import math
 from sys import exit
 from random import randint
+import time
+
+fallen_objects = 0
 
 class Fireman(pygame.sprite.Sprite):
     def __init__(self,x,y):
@@ -18,17 +21,17 @@ class Fireman(pygame.sprite.Sprite):
 
         self.working_frames = 0
 
-        self.flame_sound = pygame.mixer.Sound('../../Assets/audio/scene4/flames2.wav')
+        self.flame_sound = pygame.mixer.Sound('../Assets/audio/scene4/flames2.wav')
         self.flame_sound.set_volume(0.5)
 
         for i in range(1, 12):
-            path = f"../../Assets/sprites/scene4/fireman/idle{i}.png"
+            path = f"../Assets/sprites/scene4/fireman/idle{i}.png"
             img = pygame.image.load(path).convert_alpha()
             scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             self.idle.append(scaled_img)
 
         for i in range(1,12):
-            path = f"../../Assets/sprites/scene4/fireman/w{i}.png"
+            path = f"../Assets/sprites/scene4/fireman/w{i}.png"
             img = pygame.image.load(path).convert_alpha()
             scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             self.working.append(scaled_img)
@@ -87,11 +90,11 @@ class SiliconWoman(pygame.sprite.Sprite):
 
         self.working_frames = 0
 
-        self.spark_sound = pygame.mixer.Sound('../../Assets/audio/scene4/sparks2.wav')
+        self.spark_sound = pygame.mixer.Sound('../Assets/audio/scene4/sparks2.wav')
         self.spark_sound.set_volume(0.5)
 
         for i in range(1, 12):
-            path = f"../../Assets/sprites/scene4/sili_wom/sw{i}.png"
+            path = f"../Assets/sprites/scene4/sili_wom/sw{i}.png"
             img = pygame.image.load(path).convert_alpha()
             scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             if i==1:
@@ -142,11 +145,11 @@ class Watergirl(pygame.sprite.Sprite):
 
         self.working_frames = 0
 
-        self.wash_sound = pygame.mixer.Sound('../../Assets/audio/scene4/wash2.wav')
+        self.wash_sound = pygame.mixer.Sound('../Assets/audio/scene4/wash2.wav')
         self.wash_sound.set_volume(0.5)
 
         for i in range(1, 7):
-            path = f"../../Assets/sprites/scene4/watergirl/wg{i}.png"
+            path = f"../Assets/sprites/scene4/watergirl/wg{i}.png"
             img = pygame.image.load(path).convert_alpha()
             scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             if i==1:
@@ -198,11 +201,11 @@ class Fireboy(pygame.sprite.Sprite):
 
         self.working_frames = 0
 
-        self.cough_sound = pygame.mixer.Sound('../../Assets/audio/scene4/cough31.mp3')
+        self.cough_sound = pygame.mixer.Sound('../Assets/audio/scene4/cough31.mp3')
         self.cough_sound.set_volume(0.5)
 
         for i in range(1, 15):
-            path = f"../../Assets/sprites/scene4/fireboy/b{i}.png"
+            path = f"../Assets/sprites/scene4/fireboy/b{i}.png"
             img = pygame.image.load(path).convert_alpha()
             scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             if i < 6:
@@ -261,18 +264,19 @@ class BrokenPhone(pygame.sprite.Sprite):
         self. speed = 5
         self.worker_group = worker_goup
 
-        img = pygame.image.load("../../Assets/sprites/scene4/junk/broken_phone.png").convert_alpha()
+        img = pygame.image.load("../Assets/sprites/scene4/junk/broken_phone.png").convert_alpha()
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
 
-        self.fall_sound = pygame.mixer.Sound('../../Assets/audio/scene4/fall.mp3')
+        self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
         self.fall_sound.set_volume(0.5)
 
         self.dragging = False
 
     def update(self):
+        global fallen_objects
         if self.dragging:
             self.rect.center = pygame.mouse.get_pos()
         else:
@@ -286,6 +290,7 @@ class BrokenPhone(pygame.sprite.Sprite):
                     self.rect.center = (self.motion_x, self.motion_y)
         if self.rect.centery > 620:
             self.fall_sound.play()
+            fallen_objects += 1
             self.kill()
 
 class Flask(pygame.sprite.Sprite):
@@ -300,18 +305,19 @@ class Flask(pygame.sprite.Sprite):
         self. speed = 5
         self.worker_group = worker_goup
 
-        img = pygame.image.load("../../Assets/sprites/scene4/junk/flask.png").convert_alpha()
+        img = pygame.image.load("../Assets/sprites/scene4/junk/flask.png").convert_alpha()
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
 
-        self.fall_sound = pygame.mixer.Sound('../../Assets/audio/scene4/fall.mp3')
+        self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
         self.fall_sound.set_volume(0.5)
 
         self.dragging = False
 
     def update(self):
+        global fallen_objects
         if self.dragging:
             self.rect.center = pygame.mouse.get_pos()
         else:
@@ -325,6 +331,7 @@ class Flask(pygame.sprite.Sprite):
                     self.rect.center = (self.motion_x, self.motion_y)
         if self.rect.centery > 620:
             self.fall_sound.play()
+            fallen_objects += 1
             self.kill()
 
 class Motherboard(pygame.sprite.Sprite):
@@ -339,18 +346,19 @@ class Motherboard(pygame.sprite.Sprite):
         self. speed = 5
         self.worker_group = worker_goup
 
-        img = pygame.image.load("../../Assets/sprites/scene4/junk/motherboard.png").convert_alpha()
+        img = pygame.image.load("../Assets/sprites/scene4/junk/motherboard.png").convert_alpha()
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
 
-        self.fall_sound = pygame.mixer.Sound('../../Assets/audio/scene4/fall.mp3')
+        self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
         self.fall_sound.set_volume(0.5)
 
         self.dragging = False
 
     def update(self):
+        global fallen_objects
         if self.dragging:
             self.rect.center = pygame.mouse.get_pos()
         else:
@@ -364,6 +372,7 @@ class Motherboard(pygame.sprite.Sprite):
                     self.rect.center = (self.motion_x, self.motion_y)
         if self.rect.centery > 620:
             self.fall_sound.play()
+            fallen_objects += 1
             self.kill()
 
 class Chemical(pygame.sprite.Sprite):
@@ -378,18 +387,19 @@ class Chemical(pygame.sprite.Sprite):
         self. speed = 5
         self.worker_group = worker_goup
 
-        img = pygame.image.load("../../Assets/sprites/scene4/junk/yellow_chem.png").convert_alpha()
+        img = pygame.image.load("../Assets/sprites/scene4/junk/yellow_chem.png").convert_alpha()
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
 
-        self.fall_sound = pygame.mixer.Sound('../../Assets/audio/scene4/fall.mp3')
+        self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
         self.fall_sound.set_volume(0.5)
 
         self.dragging = False
 
     def update(self):
+        global fallen_objects
         if self.dragging:
             self.rect.center = pygame.mouse.get_pos()
         else:
@@ -403,6 +413,7 @@ class Chemical(pygame.sprite.Sprite):
                     self.rect.center = (self.motion_x, self.motion_y)
         if self.rect.centery > 620:
             self.fall_sound.play()
+            fallen_objects += 1
             self.kill()
 
 class Line(pygame.sprite.Sprite):
@@ -412,7 +423,7 @@ class Line(pygame.sprite.Sprite):
         self.y = y
         self.speed = 5
 
-        img = pygame.image.load("../../Assets/sprites/scene4/line.png").convert_alpha()
+        img = pygame.image.load("../Assets/sprites/scene4/line.png").convert_alpha()
         self.image = img
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
@@ -427,7 +438,7 @@ pygame.init()
 
 # Set up the screen
 screen = pygame.display.set_mode((800, 600))
-background = pygame.image.load("../../Assets/sprites/scene4/bg.png")
+background = pygame.image.load("../Assets/sprites/scene4/bg.png")
 pygame.display.set_caption('E-Waste')
 clock = pygame.time.Clock()
 
@@ -459,9 +470,9 @@ motherboard_group = pygame.sprite.Group()
 
 chemical_group = pygame.sprite.Group()
 
-story_msg = pygame.mixer.Sound('../../Assets/audio/scene4/scene4_audio.wav')
+story_msg = pygame.mixer.Sound('../Assets/audio/scene4/scene4_audio.wav')
 story_msg.play()
-# bg_music = pygame.mixer.Sound('../../Assets/audio/scene4/happy1.wav')
+# bg_music = pygame.mixer.Sound('../Assets/audio/scene4/happy1.wav')
 # bg_music.set_volume(0.2)
 # bg_music.play()
 
@@ -470,7 +481,15 @@ BLACK = (0, 0, 0)
 
 count = 0
 
+message_over = False
+start_time = time.time()
+
 while True:
+    current_time = time.time()
+    elapsed_time = current_time - start_time
+    if elapsed_time > 32:
+        message_over = True
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -516,6 +535,9 @@ while True:
             elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 if chemical.dragging:
                     chemical.dragging = False   
+    if (message_over == True and fallen_objects > 20):
+        pygame.quit()
+        exit()
 
     screen.blit(background,(0,0))
 

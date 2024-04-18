@@ -22,11 +22,11 @@ class Soldier(pygame.sprite.Sprite):
         self.is_inverted = is_inverted
         self.worker_group = worker_group
 
-        self.dig_sound = pygame.mixer.Sound('../../Assets/audio/scene1/dig2.wav')
-        self.dig_sound.set_volume(0.5)
+        self.dig_sound = pygame.mixer.Sound('../Assets/audio/scene1/dig2.wav')
+        self.dig_sound.set_volume(0.9)
         
         for i in range(0, 13):
-            path = f"../../Assets/sprites/scene1/s{i}.png"
+            path = f"../Assets/sprites/scene1/s{i}.png"
             img = pygame.image.load(path).convert_alpha()
             scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             if self.is_inverted == False:
@@ -148,7 +148,7 @@ class Worker(pygame.sprite.Sprite):
         self.prev_state = -1
         
         for i in range(0, 4):
-            path = f"../../Assets/sprites/scene1/w{i}.png"
+            path = f"../Assets/sprites/scene1/w{i}.png"
             img = pygame.image.load(path).convert_alpha()
             scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             if self.is_inverted == False:
@@ -160,7 +160,7 @@ class Worker(pygame.sprite.Sprite):
             self.working.append(self.working[i])        
         
         for i in range(0,3):
-            path = f"../../Assets/sprites/scene1/t{i}.png"
+            path = f"../Assets/sprites/scene1/t{i}.png"
             img = pygame.image.load(path).convert_alpha()
             scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
             if self.is_inverted == True:
@@ -222,12 +222,12 @@ pygame.init()
 
 # Set up the screen
 screen = pygame.display.set_mode((800, 600))
-background = pygame.image.load("../../Assets/sprites/scene1/bg.png")
+background = pygame.image.load("../Assets/sprites/scene1/bg.png")
 pygame.display.set_caption('Congo')
 clock = pygame.time.Clock()
-story_msg = pygame.mixer.Sound('../../Assets/audio/scene1/story13.wav')
+story_msg = pygame.mixer.Sound('../Assets/audio/scene1/story13.wav')
 story_msg.play()
-bg_music = pygame.mixer.Sound('../../Assets/audio/scene1/happy1.wav')
+bg_music = pygame.mixer.Sound('../Assets/audio/scene1/happy1.wav')
 bg_music.set_volume(0.2)
 bg_music.play()
 # bg_music = pygame.mixer.Sound('')
@@ -261,12 +261,13 @@ soldier_group.add(soldier_left)
 soldier_group.add(soldier_right)
 
 start_time = time.time()
-target_time = 60
+message_over = False
 
 while True:
-
     current_time = time.time()
     elapsed_time = current_time - start_time
+    if elapsed_time > 38:
+        message_over = True
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -288,9 +289,12 @@ while True:
                         soldier_right.set_target(worker.rect.centerx, worker.rect.centery-45)
     
     tired_count = 0
-    for workers in workers_combined:
+    for worker in workers_combined:
+        tired_count += worker.curr_state
+    if tired_count > 4 and message_over == True:
+        pygame.quit()
+        exit()
         
-
     # screen.fill((255, 255, 255))
     screen.blit(background,(0,0))
     soldier_group.draw(screen)    
