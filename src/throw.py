@@ -85,7 +85,7 @@ thrower = 0
 score=0
 neg_score=0
 
-bg_audio_3.play()
+# bg_audio_3.play()
 
 while running:
     screen.blit(bg_game3,(0,0))
@@ -199,7 +199,7 @@ while running:
     if score+neg_score==25:
         if score>20:
             running = False
-            exec(open("rev.py").read())
+            # exec(open("rev.py").read())
         else:
             execute_failure()
             score=0

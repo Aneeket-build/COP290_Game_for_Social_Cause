@@ -1,0 +1,106 @@
+import pygame
+import sys
+
+pygame.init()
+
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((800, 600))
+pygame.display.set_caption("Game Title")
+
+play_hover_sound = pygame.mixer.Sound("../Assets/audio/main_page/play_hover_sound.mp3")
+
+background = pygame.image.load("../Assets/sprites/main_page/main.jpg")
+background = pygame.transform.scale(background, (800, 600))
+
+text_size1 = 25
+text_size2 = 25
+text_size3 = 25
+text_size4 = 25
+text1 = "Scene1"
+text2 = "Scene2"
+text3 = "Scene3"
+text4 = "Scene4"
+
+pause = 0
+
+clock = pygame.time.Clock()
+
+running = True
+
+
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+    if event.type == pygame.MOUSEMOTION:
+        if play_button_rect1.collidepoint(event.pos):
+            text_size1 = 30
+            if(pause==0):
+                play_hover_sound.play()
+                pause+=1
+        elif play_button_rect2.collidepoint(event.pos):
+            text_size2 = 30
+            if(pause==0):
+                play_hover_sound.play()
+                pause+=1
+        elif play_button_rect3.collidepoint(event.pos):
+            text_size3 = 30
+            if(pause==0):
+                play_hover_sound.play()
+                pause+=1
+        elif play_button_rect4.collidepoint(event.pos):
+            text_size4 = 30
+            if(pause==0):
+                play_hover_sound.play()
+                pause+=1
+        else:
+            text_size1 = 25
+            text_size2 = 25
+            text_size3 = 25
+            text_size4 = 25
+            pause=0
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        if play_button_rect1.collidepoint(event.pos):
+            running = False
+            exec(open("scene1.py").read())
+        elif play_button_rect2.collidepoint(event.pos):
+            running = False 
+            exec(open("factory.py").read())
+        elif play_button_rect3.collidepoint(event.pos):
+            running = False 
+            exec(open("throw.py").read())
+        elif play_button_rect4.collidepoint(event.pos):
+            running = False 
+            exec(open("scene4.py").read())
+
+    screen.blit(background, (0, 0))
+
+    font1 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size1)
+    play_button1 = font1.render(text1, True, (0, 0, 0))
+    play_button_rect1 = play_button1.get_rect(center=(400, 240))
+    screen.blit(play_button1,play_button_rect1)
+    font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size2)
+    play_button2 = font2.render(text2, True, (0, 0, 0))
+    play_button_rect2 = play_button2.get_rect(center=(400, 300))
+    screen.blit(play_button2,play_button_rect2)
+    font3 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size3)
+    play_button3 = font3.render(text3, True, (0, 0, 0))
+    play_button_rect3 = play_button3.get_rect(center=(400, 360))
+    screen.blit(play_button3,play_button_rect3)
+    font4 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size4)
+    play_button4 = font4.render(text4, True, (0, 0, 0))
+    play_button_rect4 = play_button4.get_rect(center=(400, 420))
+    screen.blit(play_button4,play_button_rect4)
+    
+    head_font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", 35)
+    head_text = head_font.render("Choose",True,(255,0,0))
+    head_text_rect = head_text.get_rect(center=(400,135))
+    screen.blit(head_text,head_text_rect)
+    head_text2 = head_font.render("Game",True,(255,0,0))
+    head_text_rect2 = head_text2.get_rect(center=(400,175))
+    screen.blit(head_text2,head_text_rect2)
+
+    pygame.display.flip()
+    clock.tick(30)
+

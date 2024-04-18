@@ -12,7 +12,9 @@ pygame.init()
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
-bg_audio_2 = pygame.mixer.Sound("../Assets/audio/scene2/scene2_audio.wav")
+bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
+bg_audio_3.set_volume(5)
+
 
 caught_sound = pygame.mixer.Sound("../Assets/audio/scene2/caught.wav")
 caught_sound.set_volume(0.2)
@@ -50,8 +52,6 @@ text_rect.top = 15
 
 def create_sprite():
     return sprite_img_fall.get_rect(topleft=(random.randint(75, WIDTH - sprite_img_fall.get_width()-75), 140-sprite_img_fall.get_height()))
-
-bg_audio_2.play()
 
 running = True
 
@@ -146,7 +146,8 @@ while running:
     if score+neg_score==8:
         if score>5:
             running = False
-            exec(open("throw.py").read())
+            # bg_audio_3.play()
+            # exec(open("throw.py").read())
         else:
             execute_failure()
             score=0

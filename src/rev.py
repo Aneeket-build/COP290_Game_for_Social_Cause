@@ -1,6 +1,12 @@
 import pygame
 import sys
 
+def execute_level(file_name):
+    with open(file_name, 'r') as file:
+        code = file.read()
+    exec(code)
+
+
 pygame.init()
 
 WIDTH, HEIGHT = 800, 600
