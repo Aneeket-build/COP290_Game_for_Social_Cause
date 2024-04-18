@@ -270,7 +270,7 @@ class BrokenPhone(pygame.sprite.Sprite):
         self.motion_x = x
         self.motion_y = y
 
-        self.speed = 3.5
+        self.speed = 4
         self.worker_group = worker_goup
 
         img = pygame.image.load("../Assets/sprites/scene4/junk/broken_phone.png").convert_alpha()
@@ -312,7 +312,7 @@ class Flask(pygame.sprite.Sprite):
         self.motion_x = x
         self.motion_y = y
 
-        self. speed = 3.5
+        self.speed = 4
         self.worker_group = worker_goup
 
         img = pygame.image.load("../Assets/sprites/scene4/junk/flask.png").convert_alpha()
@@ -354,7 +354,7 @@ class Motherboard(pygame.sprite.Sprite):
         self.motion_x = x
         self.motion_y = y
 
-        self.speed = 3.5
+        self.speed = 4
         self.worker_group = worker_goup
 
         img = pygame.image.load("../Assets/sprites/scene4/junk/motherboard.png").convert_alpha()
@@ -396,7 +396,7 @@ class Chemical(pygame.sprite.Sprite):
         self.motion_x = x
         self.motion_y = y
 
-        self. speed = 3.5
+        self.speed = 4
         self.worker_group = worker_goup
 
         img = pygame.image.load("../Assets/sprites/scene4/junk/yellow_chem.png").convert_alpha()
@@ -434,7 +434,7 @@ class Line(pygame.sprite.Sprite):
         super().__init__()
         self.x = x
         self.y = y
-        self.speed = 3.5
+        self.speed = 4
 
         img = pygame.image.load("../Assets/sprites/scene4/line.png").convert_alpha()
         self.image = img
