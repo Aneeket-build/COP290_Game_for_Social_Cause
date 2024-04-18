@@ -60,7 +60,7 @@ faces = pygame.sprite.GroupSingle()
 faces.add(Face(521, 108))
 
 bg_music = pygame.mixer.Sound('../Assets/audio/face/failure1.wav')
-bg_music.set_volume(0.2)
+# bg_music.set_volume(0.2)
 bg_music.play()
 
 text_size = 20
@@ -70,7 +70,9 @@ play_button_rect = play_button.get_rect(center=(400, 400))
 
 pause = 0
 
-while True:
+running = True
+
+while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -86,7 +88,7 @@ while True:
                 pause = 0
         if event.type == pygame.MOUSEBUTTONDOWN:
             if play_button_rect.collidepoint(event.pos):
-                pass
+                running=False
         
     screen.blit(background, (0, 0))
     font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size)
@@ -94,7 +96,7 @@ while True:
     faces.draw(screen)
     faces.update()
 
-    play_button = font.render(play_text, True, (255, 255, 255))
+    play_button = font.render(text, True, (255, 255, 255))
     play_button_rect = play_button.get_rect(center=(400, 470))
     screen.blit(play_button, play_button_rect)
     

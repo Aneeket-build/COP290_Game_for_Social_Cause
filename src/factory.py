@@ -2,6 +2,11 @@ import pygame
 import random
 import sys
 
+def execute_failure():
+    with open('failure.py', 'r') as file:
+        code = file.read()
+    exec(code)
+
 pygame.init()
 
 WIDTH, HEIGHT = 800, 600
@@ -143,8 +148,9 @@ while running:
             running = False
             exec(open("throw.py").read())
         else:
-            running = False
-            exec(open("rev.py").read())    
+            execute_failure()
+            score=0
+            neg_score=0  
     
 
     pygame.display.flip()
