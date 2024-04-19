@@ -11,6 +11,7 @@ pygame.init()
 
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("TOXIC TECH")
 
 bg_audio = pygame.mixer.Sound("../Assets/audio/scene2/scene2_bg_audio.mp3")
 bg_audio.set_volume(0.4)
@@ -34,9 +35,9 @@ pause_size3 = 22
 pause_text1 = "RESUME GAME"
 pause_text2 = "RESTART GAME"
 pause_text3 = "MAIN MENU"
-pause_font1 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size1)
-pause_font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size2)
-pause_font3 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size3)
+pause_font1 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size1)
+pause_font2 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size2)
+pause_font3 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size3)
 pause_button1 = pause_font1.render(pause_text1,True,(0,0,0))
 pause_button2 = pause_font2.render(pause_text2,True,(0,0,0))
 pause_button3 = pause_font3.render(pause_text3,True,(0,0,0))

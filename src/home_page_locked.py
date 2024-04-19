@@ -13,7 +13,7 @@ pygame.init()
 
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("Game Title")
+pygame.display.set_caption("TOXIC TECH")
 
 play_hover_sound = pygame.mixer.Sound("../Assets/audio/main_page/play_hover_sound.mp3")
 locked_sound = pygame.mixer.Sound("../Assets/audio/main_page/locked_sound.wav")
@@ -35,10 +35,10 @@ clock = pygame.time.Clock()
 
 running = True
 
-font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size)
+font = pygame.font.Font("../Assets/fonts/play_font.ttf", text_size)
 play_button = font.render(play_text, True, (0, 0, 0))
 play_button_rect = play_button.get_rect(center=(400, 350))
-font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size2)
+font2 = pygame.font.Font("../Assets/fonts/play_font.ttf", text_size2)
 free_play_button = font2.render(free_play_text,True,(0,0,0))
 free_play_button_rect = free_play_button.get_rect(center=(420,415))
 
@@ -90,11 +90,11 @@ while running:
     screen.blit(screen_img,(271,108))
     screen.blit(lock_img,(285,390))
 
-    font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size)
+    font = pygame.font.Font("../Assets/fonts/play_font.ttf", text_size)
     play_button = font.render(play_text, True, (0, 0, 0))
     play_button_rect = play_button.get_rect(center=(400, 350))
     screen.blit(play_button,play_button_rect)
-    font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size2)
+    font2 = pygame.font.Font("../Assets/fonts/play_font.ttf", text_size2)
     free_play_button = font2.render(free_play_text,True,(0,0,0))
     free_play_button_rect = free_play_button.get_rect(center=(420,415))
     screen.blit(free_play_button,free_play_button_rect)

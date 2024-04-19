@@ -10,7 +10,7 @@ background = pygame.image.load("../Assets/sprites/msgs/m1.png").convert_alpha()
 bg2 = pygame.image.load("../Assets/sprites/msgs/m5.png").convert_alpha()
 msg_box = pygame.image.load("../Assets/sprites/msgs/black_box.png").convert_alpha()
 warning = pygame.image.load("../Assets/sprites/msgs/warning.png").convert_alpha()
-pygame.display.set_caption('Congo')
+pygame.display.set_caption('TOXIC TECH')
 clock = pygame.time.Clock()
 
 bg_music = pygame.mixer.Sound("../Assets/audio/msg/ryuk_theme.wav")
