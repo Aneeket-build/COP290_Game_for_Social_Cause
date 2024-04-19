@@ -9,9 +9,6 @@ def execute_failure():
 
 pygame.init()
 
-# bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
-# bg_audio_3.set_volume(5)
-
 bg_audio = pygame.mixer.Sound("../Assets/audio/scene3/scene3_bg_audio.mp3")
 bg_audio.set_volume(0.5)
 hit_sound = pygame.mixer.Sound("../Assets/audio/scene3/hit.mp3")
@@ -67,7 +64,6 @@ text_surface2 = font.render(message2,True,(255,255,255))
 text_surface3 = font.render(message3,True,(255,255,255))
 text_rect2 = text_surface2.get_rect(topleft=(10,15))
 text_rect3 = text_surface3.get_rect(topleft=(85,50))
-
 
 thrower_pos = (400, 75)
 arm_stretched = False
@@ -290,7 +286,6 @@ while running:
             if score>9:
                 pygame.mixer.stop()
                 running = False
-                # exec(open("rev.py").read())
             else:
                 pygame.mixer.stop()
                 execute_failure()
