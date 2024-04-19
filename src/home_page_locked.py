@@ -79,7 +79,7 @@ while running:
             text_size2 = 27
             pause=0
     if event.type == pygame.MOUSEBUTTONDOWN:
-        if play_button_rect.collidepoint(event.pos) and (current_time-start_time)>1000:
+        if play_button_rect.collidepoint(event.pos) and (current_time-start_time)>500:
             execute_level("welcome.py")
             msg.set_message(1)
             execute_level("scene1.py")

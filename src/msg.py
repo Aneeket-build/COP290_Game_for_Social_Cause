@@ -33,7 +33,7 @@ msg1_4 = "Directly or indirectly, we are all involved in this complex illegal tr
 # Scene 2
 msg2_1 = "Like most electronic gadgets, this phone was assembled in China, in a factory as big as a city."
 
-msg2_2 = "Due to flexible labour laws, the workers are subjected to much abuse and dicrimination. They are forced into illegal overtime and often work in inhumane conditions."
+msg2_2 = "Due to flexible labour laws, the workers are subjected to much abuse and discrimination. They are forced into illegal overtime and often work in inhumane conditions."
 
 msg2_3 = "As a result, many workers commit suicide due to severe desperation."
 
@@ -62,16 +62,16 @@ msgs = []
 msg_durations = []
 
 msgs1 = [msg1_1, msg1_2, msg1_3,msg1_4,inst_msg1]
-msg_durations1 = [6000,6000,6000,6000,6000]
+msg_durations1 = [6000,5000,6000,4000,4000]
 
 msgs2 = [msg2_1, msg2_2, msg2_3,inst_msg2]
-msg_durations2 = [6000,6000,6000,6000]
+msg_durations2 = [4000,6000,4000,5000]
 
 msgs3 = [msg3_1, msg3_2, msg3_3,inst_msg3]
-msg_durations3 = [6000,6000,6000,6000]
+msg_durations3 = [5000,5000,6000,5000]
 
 msgs4 = [msg4_1, msg4_2, msg4_3, inst_msg4]
-msg_durations4 = [6000,6000,6000,6000]
+msg_durations4 = [5000,6000,5000,5000]
 
 audio_length = 0
 

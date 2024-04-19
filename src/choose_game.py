@@ -23,10 +23,12 @@ text_size1 = 25
 text_size2 = 25
 text_size3 = 25
 text_size4 = 25
+text_size5 = 25
 text1 = "Scene1"
 text2 = "Scene2"
 text3 = "Scene3"
 text4 = "Scene4"
+text5 = "Main Menu"
 
 pause = 0
 
@@ -46,6 +48,9 @@ play_button_rect3 = play_button3.get_rect(center=(400, 360))
 font4 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size4)
 play_button4 = font4.render(text4, True, (0, 0, 0))
 play_button_rect4 = play_button4.get_rect(center=(400, 420))
+font5 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size5)
+play_button5 = font5.render(text5, True, (0, 0, 0))
+play_button_rect5 = play_button5.get_rect(center=(400, 480))
 
 head_font = pygame.font.Font("../Assets/sprites/main_page/choose_font.ttf", 50)
 head_text = head_font.render("Choose",True,(255,180,60))
@@ -81,11 +86,17 @@ while running:
             if(pause==0):
                 play_hover_sound.play()
                 pause+=1
+        elif play_button_rect5.collidepoint(event.pos):
+            text_size5 = 30
+            if(pause==0):
+                play_hover_sound.play()
+                pause+=1        
         else:
             text_size1 = 25
             text_size2 = 25
             text_size3 = 25
             text_size4 = 25
+            text_size5 = 25
             pause=0
             
     current_time = pygame.time.get_ticks()        
@@ -106,6 +117,9 @@ while running:
             running = False 
             execute_level("scene4.py")
             exec(open("unlocked_home_page.py").read())
+        elif play_button_rect5.collidepoint(event.pos):
+            running = False
+            exec(open("unlocked_home_page.py").read())    
 
     screen.blit(background, (0, 0))
     screen.blit(screen_img,(271,108))
@@ -125,13 +139,12 @@ while running:
     play_button4 = font4.render(text4, True, (0, 0, 0))
     play_button_rect4 = play_button4.get_rect(center=(400, 420))
     screen.blit(play_button4,play_button_rect4)
-    
-    head_font = pygame.font.Font("../Assets/sprites/main_page/choose_font.ttf", 50)
-    head_text = head_font.render("Choose",True,(255,180,60))
-    head_text_rect = head_text.get_rect(center=(400,135))
+    font5 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size5)
+    play_button5 = font5.render(text5, True, (0, 0, 0))
+    play_button_rect5 = play_button5.get_rect(center=(400, 480))
+    screen.blit(play_button5,play_button_rect5)
+   
     screen.blit(head_text,head_text_rect)
-    head_text2 = head_font.render("Game",True,(255,180,60))
-    head_text_rect2 = head_text2.get_rect(center=(400,175))
     screen.blit(head_text2,head_text_rect2)
 
     pygame.display.flip()

@@ -117,7 +117,7 @@ pause = False
 while running:
     screen.blit(bg_game3,(0,0))
     message3 = str(score) + " / " + str(score+neg_score)
-    if score/(score+neg_score+1) > 0.5 :
+    if score+neg_score==0 or score/(score+neg_score) > 0.5 :
         text_surface2 = font.render(message2,True,(0,255,0))
         text_surface3 = font.render(message3,True,(0,255,0))
     else:

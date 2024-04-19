@@ -221,7 +221,7 @@ while running:
                 screen.blit(sprite_img_fall, sprite_rect[0])
         screen.blit(trampoline_img, trampoline_rect)
         message = "Working Hands Saved: " + str(2*score) + " / " + str(2*(score+neg_score))
-        if score/(score+neg_score+1) >= 0.55 : 
+        if score+neg_score==0 or score/(score+neg_score) > 0.59 : 
             text_surface = font.render(message, True, (0,255,0))
         else:
             text_surface = font.render(message, True, (255,0,0))
