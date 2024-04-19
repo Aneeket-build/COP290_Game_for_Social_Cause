@@ -27,8 +27,8 @@ background = pygame.transform.scale(background, (800, 600))
 
 screen_name = "home page"
 
-text_size = 25
-text_size2 = 25
+text_size = 29
+text_size2 = 29
 play_text = "Story Mode"
 free_play_text = "Free Play"
 
@@ -54,18 +54,18 @@ while running:
             sys.exit()
     if event.type == pygame.MOUSEMOTION:
         if play_button_rect.collidepoint(event.pos):
-            text_size = 30
+            text_size = 25
             if(pause==0):
                 play_hover_sound.play()
                 pause+=1
         elif free_play_button_rect.collidepoint(event.pos):
-            text_size2 = 30
+            text_size2 = 25
             if(pause==0):
                 play_hover_sound.play()
                 pause+=1        
         else:
-            text_size = 25
-            text_size2 = 25
+            text_size = 29
+            text_size2 = 29
             pause=0
             
     current_time = pygame.time.get_ticks()  

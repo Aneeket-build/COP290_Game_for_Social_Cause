@@ -64,9 +64,13 @@ bg_music = pygame.mixer.Sound('../Assets/audio/face/failure1.wav')
 bg_music.play()
 
 text_size = 20
+text_size2 =20
 text = "TRY AGAIN"
+text2 = "MAIN MENU"
 play_button = font.render(text, True, (0, 0, 0))
 play_button_rect = play_button.get_rect(center=(400, 400))
+return_button = font.render(text2,True,(0,0,0))
+return_button_rect = return_button.get_rect(center=(400,135))
 
 pause = 0
 
@@ -83,23 +87,35 @@ while running:
                 if pause == 0:
                     play_hover_sound.play()
                     pause += 1
+            elif return_button_rect.collidepoint(event.pos):
+                text_size2 = 20
+                if pause==0:
+                    play_hover_sound.play()
+                    pause+=1        
             else:
                 text_size = 25
+                text_size2 = 25
                 pause = 0
         if event.type == pygame.MOUSEBUTTONDOWN:
             if play_button_rect.collidepoint(event.pos):
                 pygame.mixer.stop()
                 running=False
+            elif return_button_rect.collidepoint(event.pos):
+                pygame.mixer.stop()
+                exec(open("unlocked_home_page.py").read())    
         
     screen.blit(background, (0, 0))
     font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size)
-
+    font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size2)
     faces.draw(screen)
     faces.update()
 
     play_button = font.render(text, True, (255, 255, 255))
     play_button_rect = play_button.get_rect(center=(400, 470))
     screen.blit(play_button, play_button_rect)
+    return_button = font2.render(text2,True,(255,255,255))
+    return_button_rect = return_button.get_rect(center=(400,135))
+    screen.blit(return_button,return_button_rect)
     
     pygame.display.update()
     clock.tick(25)

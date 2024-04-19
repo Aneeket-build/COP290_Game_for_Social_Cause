@@ -32,8 +32,8 @@ font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", 45)
 
 screen_name = "home page"
 
-text_size = 25
-text_size2 = 25
+text_size = 28
+text_size2 = 27
 play_text = "Story Mode"
 free_play_text = "Free Play"
 
@@ -63,18 +63,18 @@ while running:
             sys.exit()
     if event.type == pygame.MOUSEMOTION and (current_time-start_time)>1000:
         if play_button_rect.collidepoint(event.pos):
-            text_size = 30
+            text_size = 25
             if(pause==0):
                 play_hover_sound.play()
                 pause+=1
         elif free_play_button_rect.collidepoint(event.pos) and (current_time-start_time)>1000:
-            text_size2 = 27
+            text_size2 = 25
             if(pause==0):
                 locked_sound.play()
                 pause+=1        
         else:
-            text_size = 25
-            text_size2 = 25
+            text_size = 28
+            text_size2 = 27
             pause=0
     if event.type == pygame.MOUSEBUTTONDOWN:
         if play_button_rect.collidepoint(event.pos) and (current_time-start_time)>1000:
