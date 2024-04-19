@@ -66,13 +66,7 @@ class Soldier(pygame.sprite.Sprite):
         elif self.prev_state == 3 and self.curr_state == 2:
             for worker in self.worker_group:
                 if abs(worker.rect.centery -45 - self.rect.centery) <= 20:
-                    print("touch")
                     worker.curr_state = 0
-                else:
-                    print("no touch")
-                    # print(f"Soldier rect: {self.rect.centerx}, {self.rect.centery}")
-                    # print(f"Worker rect: {worker.rect.centerx}, {worker.rect.centery}")
-
 
         # Update the sprite based on the image index
         if self.curr_state == 0:
@@ -92,28 +86,19 @@ class Soldier(pygame.sprite.Sprite):
             if self.frame < 3:
                 self.frame += 0.5
             else: self.frame = 0
-            # print("curr_state: "+ str(self.curr_state))
-            # print("frame: "+str(self.frame))
         if self.curr_state == 1:  
             if self.frame < 5:
                 self.frame += 0.5
             else: self.frame = 0
-            # print("curr_state: "+ str(self.curr_state))
-            # print("frame: "+str(self.frame))
         if self.curr_state == 3:  
             if self.shout_frames < 8:
                 if self.frame < 1:
                     self.frame += 0.5
                 else: self.frame = 0
                 self.shout_frames +=1
-                # print("shout frames : "+str(self.shout_frames))
-                # print("curr_state: "+ str(self.curr_state))
-                # print("frame: "+str(self.frame))
             else:
                 self.curr_state = 2
                 self.shout_frames = 0
-                # print("curr_state: "+ str(self.curr_state))
-                # print("frame: "+str(self.frame))
 
     def move_away(self):
         if self.rect.centery > self.target_y:
@@ -122,9 +107,7 @@ class Soldier(pygame.sprite.Sprite):
             self.curr_state = 3
             self.frame = 0
             self.dig_sound.play()
-            # print("curr_state: "+ str(self.curr_state))
-            # print("frame: "+str(self.frame))
-                    
+
     def move_towards(self):
         if self.rect.centery < self.target_y:
             self.rect.centery += self.speed
@@ -132,8 +115,6 @@ class Soldier(pygame.sprite.Sprite):
             self.curr_state = 3
             self.frame = 0
             self.dig_sound.play()
-            # print("curr_state: "+ str(self.curr_state))
-            # print("frame: "+str(self.frame))
                 
     def set_target(self, target_x, target_y):
         self.target_x = target_x
@@ -192,7 +173,6 @@ class Worker(pygame.sprite.Sprite):
         if self.curr_state == 0:
             self.image = self.working[int(self.frame)]
         if self.curr_state == 1:
-            # print("out of bound frame: " + str(int(self.frame)))
             self.image = self.tired[int(self.frame)]        
         
         if self.is_inverted == False:
@@ -206,15 +186,10 @@ class Worker(pygame.sprite.Sprite):
                 self.frame += 0.2
             else: self.frame = 0
 
-            # print("curr_state: "+ str(self.curr_state))
-            # print("frame: "+str(self.frame))
         if self.curr_state == 1:
             if self.frame < 4:
                 self.frame += 0.2
             else: self.frame = 0
-            # print("frame: " + str(int(self.frame)))
-            # print("curr_state: "+ str(self.curr_state))
-            # print("frame: "+str(self.frame))
         
         # Random logic for worker to get tired.
         # Suggest better logic
@@ -348,8 +323,6 @@ while running:
                             larger_rect = worker.rect.inflate(100, 0)
                             if larger_rect.collidepoint(target_x, target_y):
                                 soldier_left.set_target(worker.rect.centerx , worker.rect.centery-45)
-                                print("Target x: " + str(soldier_left.target_x))
-                                print("Target y: " + str(soldier_left.target_y))
                     else:
                         for worker in worker_group_right:
                             larger_rect = worker.rect.inflate(100, 0)

@@ -94,13 +94,11 @@ def set_message(scene):
         msgs = msgs1
         msg_durations = msg_durations1
         audio_length = sum(msg_durations) + 18000
-        print(audio_length)
     
     elif scene == 2:
         msgs = msgs2
         msg_durations = msg_durations2
         audio_length = sum(msg_durations) + 12000
-        print("hi")
     
     elif scene == 3:
         msgs = msgs3
@@ -113,7 +111,6 @@ def set_message(scene):
         audio_length = sum(msg_durations) + 12000
 
     running = True
-    print(str(running))
     start_time = pygame.time.get_ticks()  # Get the start time
     volume_decrement_rate = initial_volume / audio_length
 
@@ -128,7 +125,6 @@ def set_message(scene):
                 current_msg = msgs[msg_index]
                 msg_timer = msg_durations[msg_index]
                 msg_index += 1
-                print(msg_index)
             else:
                 current_msg = ""
                 msg_timer = 0

@@ -45,7 +45,7 @@ class Fireman(pygame.sprite.Sprite):
         self.frame = 0
         self.image = self.idle[self.frame]
         self.rect = self.image.get_rect()
-        self.rect.inflate(30,30)
+        self.rect.inflate(50,50)
         self.rect.bottomright = (self.x, self.y)
     
     def update(self):
@@ -56,7 +56,6 @@ class Fireman(pygame.sprite.Sprite):
         if self.curr_state == 0:
             self.image = self.idle[int(self.frame)]
         if self.curr_state == 1:
-            # print("out of bound frame: " + str(int(self.frame)))
             self.flame_sound.play()
             self.image = self.working[int(self.frame)]
         
@@ -66,8 +65,6 @@ class Fireman(pygame.sprite.Sprite):
                 self.frame += 0.2
             else: self.frame = 0
 
-            # print("curr_state: "+ str(self.curr_state))
-            # print("frame: "+str(self.frame))
         if self.curr_state == 1:
             if self.working_frames < 25:
                 if self.frame < 10:
@@ -78,9 +75,6 @@ class Fireman(pygame.sprite.Sprite):
                 self.working_frames = 0
                 self.curr_state = 0
                 self.frame = 0
-            # print("frame: " + str(int(self.frame)))
-            # print("curr_state: "+ str(self.curr_state))
-            # print("frame: "+str(self.frame))
 
 class SiliconWoman(pygame.sprite.Sprite):
     def __init__(self,x,y):
@@ -112,7 +106,7 @@ class SiliconWoman(pygame.sprite.Sprite):
         self.frame = 0
         self.image = self.idle
         self.rect = self.image.get_rect()
-        self.rect.inflate(30,30)
+        self.rect.inflate(50,50)
         self.rect.bottomleft = (self.x, self.y)
     
     def update(self):
@@ -123,7 +117,6 @@ class SiliconWoman(pygame.sprite.Sprite):
         if self.curr_state == 0:
             self.image = self.idle
         if self.curr_state == 1:
-            # print("out of bound frame: " + str(int(self.frame)))
             self.image = self.working[int(self.frame)]
             self.spark_sound.play()
         
@@ -168,7 +161,7 @@ class Watergirl(pygame.sprite.Sprite):
         self.frame = 0
         self.image = self.idle
         self.rect = self.image.get_rect()
-        self.rect.inflate(30,30)
+        self.rect.inflate(50,50)
         self.rect.bottomright = (self.x, self.y)
     
     def update(self):
@@ -179,7 +172,6 @@ class Watergirl(pygame.sprite.Sprite):
         if self.curr_state == 0:
             self.image = self.idle
         if self.curr_state == 1:
-            # print("out of bound frame: " + str(int(self.frame)))
             self.image = self.working[int(self.frame)]
             self.wash_sound.play()
         
@@ -225,7 +217,7 @@ class Fireboy(pygame.sprite.Sprite):
         self.frame = 0
         self.image = self.idle[self.frame]
         self.rect = self.image.get_rect()
-        self.rect.inflate(30,30)
+        self.rect.inflate(50,50)
         self.rect.bottomleft = (self.x, self.y)
     
     def update(self):
@@ -236,7 +228,6 @@ class Fireboy(pygame.sprite.Sprite):
         if self.curr_state == 0:
             self.image = self.idle[int(self.frame)]
         if self.curr_state == 1:
-            # print("out of bound frame: " + str(int(self.frame)))
             self.image = self.working[int(self.frame)]
             self.cough_sound.play()
         
@@ -246,8 +237,6 @@ class Fireboy(pygame.sprite.Sprite):
                 self.frame += 0.2
             else: self.frame = 0
 
-            # print("curr_state: "+ str(self.curr_state))
-            # print("frame: "+str(self.frame))
         if self.curr_state == 1:
             if self.working_frames < 25:
                 if self.frame < 8:
@@ -258,9 +247,6 @@ class Fireboy(pygame.sprite.Sprite):
                 self.working_frames = 0
                 self.curr_state = 0
                 self.frame = 0
-            # print("frame: " + str(int(self.frame)))
-            # print("curr_state: "+ str(self.curr_state))
-            # print("frame: "+str(self.frame))
 
 class BrokenPhone(pygame.sprite.Sprite):
     def __init__(self,x,y,worker_goup):
@@ -278,7 +264,7 @@ class BrokenPhone(pygame.sprite.Sprite):
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
-        self.rect.inflate(10,10)
+        self.rect.inflate(50,50)
         self.rect.center = (self.x, self.y)
 
         self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
@@ -320,7 +306,7 @@ class Flask(pygame.sprite.Sprite):
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
-        self.rect.inflate(10,10)
+        self.rect.inflate(50,50)
         self.rect.center = (self.x, self.y)
 
         self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
@@ -362,7 +348,7 @@ class Motherboard(pygame.sprite.Sprite):
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
-        self.rect.inflate(10,10)
+        self.rect.inflate(50,50)
         self.rect.center = (self.x, self.y)
 
         self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
@@ -404,7 +390,7 @@ class Chemical(pygame.sprite.Sprite):
         scaled_img = pygame.transform.scale(img, (img.get_width()/2, img.get_height()/2))
         self.image = scaled_img
         self.rect = self.image.get_rect()
-        self.rect.inflate(10,10)
+        self.rect.inflate(50,50)
         self.rect.center = (self.x, self.y)
 
         self.fall_sound = pygame.mixer.Sound('../Assets/audio/scene4/fall.mp3')
@@ -507,11 +493,6 @@ chemical_group = pygame.sprite.Group()
 
 bg_audio = pygame.mixer.Sound("../Assets/audio/scene4/scene4_bg_audio.mp3")
 bg_audio.set_volume(0.5)
-# story_msg = pygame.mixer.Sound('../Assets/audio/scene4/scene4_audio.wav')
-# story_msg.play()
-# bg_music = pygame.mixer.Sound('../Assets/audio/scene4/happy1.wav')
-# bg_music.set_volume(0.2)
-# bg_music.play()
 
 # Define the color
 BLACK = (0, 0, 0)
