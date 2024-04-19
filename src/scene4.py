@@ -504,7 +504,9 @@ motherboard_group = pygame.sprite.Group()
 
 chemical_group = pygame.sprite.Group()
 
-story_msg = pygame.mixer.Sound('../Assets/audio/scene4/scene4_audio.wav')
+bg_audio = pygame.mixer.Sound("../Assets/audio/scene4/scene4_bg_audio.mp3")
+bg_audio.set_volume(0.5)
+# story_msg = pygame.mixer.Sound('../Assets/audio/scene4/scene4_audio.wav')
 # story_msg.play()
 # bg_music = pygame.mixer.Sound('../Assets/audio/scene4/happy1.wav')
 # bg_music.set_volume(0.2)
@@ -519,6 +521,8 @@ message_over = False
 start_time = time.time()
 
 pause = False
+
+bg_audio.play()
 
 running = True
 
@@ -535,6 +539,7 @@ while running:
                 pygame.mixer.unpause()
                 pause= False
             elif pause_button2_rect.collidepoint(event.pos):
+                pygame.mixer.unpause()
                 fallen_objects=0
                 message_over=False
                 start_time = time.time()
@@ -614,6 +619,7 @@ while running:
             if fallen_objects > 10:
                 pygame.mixer.stop()
                 execute_failure()
+                bg_audio.play()
                 fallen_objects=0
                 message_over=False
                 start_time = time.time()

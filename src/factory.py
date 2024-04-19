@@ -12,14 +12,16 @@ pygame.init()
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
-bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
-bg_audio_3.set_volume(5)
-
+# bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
+# bg_audio_3.set_volume(5)
+bg_audio = pygame.mixer.Sound("../Assets/audio/scene2/scene2_bg_audio.mp3")
+bg_audio.set_volume(0.4)
 
 caught_sound = pygame.mixer.Sound("../Assets/audio/scene2/caught.wav")
 caught_sound.set_volume(0.2)
 dead_sound = pygame.mixer.Sound("../Assets/audio/scene2/dead_sound.wav")
 bounce_sound = pygame.mixer.Sound("../Assets/audio/scene2/bounce_sound.mp3")
+bounce_sound.set_volume(0.4)
 
 bg_game2 = pygame.image.load("../Assets/sprites/scene2/factory bg.jpg")
 
@@ -76,6 +78,8 @@ text_rect.top = 15
 
 pause = False
 
+bg_audio.play()
+
 running = True
 
 while running:
@@ -94,6 +98,7 @@ while running:
                 sprites = []
                 score=0
                 neg_score=0
+                pygame.mixer.unpause()
                 pause = False
             elif pause_button3_rect.collidepoint(event.pos):
                 exec(open("unlocked_home_page.py").read())    
@@ -221,8 +226,9 @@ while running:
                 # bg_audio_3.play()
                 # exec(open("throw.py").read())
             else:
-                pygame.mixer.stop()
+                pygame.mixer.pause()
                 execute_failure()
+                bg_audio.play()
                 sprites = []
                 score=0
                 neg_score=0  

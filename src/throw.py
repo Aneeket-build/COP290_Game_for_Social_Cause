@@ -9,12 +9,14 @@ def execute_failure():
 
 pygame.init()
 
-bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
-bg_audio_3.set_volume(5)
+# bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
+# bg_audio_3.set_volume(5)
 
+bg_audio = pygame.mixer.Sound("../Assets/audio/scene3/scene3_bg_audio.mp3")
+bg_audio.set_volume(0.5)
 hit_sound = pygame.mixer.Sound("../Assets/audio/scene3/hit.mp3")
 catch_sound = pygame.mixer.Sound("../Assets/audio/scene3/phone_catch.mp3")
-catch_sound.set_volume(0.5)
+catch_sound.set_volume(0.3)
 
 bg_game3 = pygame.image.load("../Assets/sprites/scene3/bg_game3.png")
 screen = pygame.display.set_mode((800, 600))
@@ -106,6 +108,8 @@ thrower = 0
 score=0
 neg_score=0
 
+bg_audio.play()
+
 pause = False
 
 while running:
@@ -129,6 +133,7 @@ while running:
                 runners_catch = []
                 last_spawned = 0
                 last_to_last_spawned = 0
+                pygame.mixer.unpause()
                 pause = False
             elif pause_button3_rect.collidepoint(event.pos):
                 exec(open("unlocked_home_page.py").read()) 
@@ -278,6 +283,7 @@ while running:
             else:
                 pygame.mixer.stop()
                 execute_failure()
+                bg_audio.play()
                 score=0
                 neg_score=0  
                 phones = []

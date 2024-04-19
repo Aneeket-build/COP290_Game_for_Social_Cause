@@ -253,10 +253,12 @@ screen = pygame.display.set_mode((800, 600))
 background = pygame.image.load("../Assets/sprites/scene1/bg.png")
 pygame.display.set_caption('Congo')
 clock = pygame.time.Clock()
-story_msg = pygame.mixer.Sound('../Assets/audio/scene1/story13.wav')
+bg_audio = pygame.mixer.Sound("../Assets/audio/scene1/scene1_bg_audio.mp3")
+bg_audio.set_volume(0.2)
+# story_msg = pygame.mixer.Sound('../Assets/audio/scene1/story13.wav')
 # story_msg.play()
-bg_music = pygame.mixer.Sound('../Assets/audio/scene1/happy1.wav')
-bg_music.set_volume(0.2)
+# bg_music = pygame.mixer.Sound('../Assets/audio/scene1/happy1.wav')
+# bg_music.set_volume(0.2)
 # bg_music.play()
 # bg_music = pygame.mixer.Sound('')
 # bg_music.play(loops = -1)
@@ -293,6 +295,8 @@ message_over = False
 
 pause = False
 
+bg_audio.play()
+
 running = True
 
 while running:
@@ -312,6 +316,7 @@ while running:
                     worker.frame = randint(0,3)
                 message_over=False
                 start_time = time.time()
+                pygame.mixer.unpause()
                 pause = False
             elif pause_button3_rect.collidepoint(event.pos):
                 exec(open("unlocked_home_page.py").read())   
@@ -357,6 +362,7 @@ while running:
             if tired_count > 4 :
                 pygame.mixer.stop()
                 execute_failure()
+                bg_audio.play()
                 for worker in workers_combined:
                     worker.curr_state = 0
                     worker.frame = randint(0,3)
