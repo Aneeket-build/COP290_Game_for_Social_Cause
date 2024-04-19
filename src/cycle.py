@@ -31,9 +31,7 @@ class Face(pygame.sprite.Sprite):
         if self.state == 1:
             self.image = self.silent[int(self.frame)]
 
-        # Move to the next frame
         if self.state == 0:
-            # print("wow")
             if self.frame < 3:
                 if self.speaking_frames < 106:
                     self.frame += 0.2
@@ -51,7 +49,6 @@ class Face(pygame.sprite.Sprite):
     
 pygame.init()
 
-# Set up the screen
 screen = pygame.display.set_mode((800, 600))
 background = pygame.image.load("../Assets/sprites/face/main.png")
 pygame.display.set_caption('Congo')
@@ -86,6 +83,3 @@ while running:
 
     pygame.display.update()
     clock.tick(25)
-
-
-

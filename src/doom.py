@@ -4,7 +4,6 @@ import sys
 pygame.init()
 
 WIDTH, HEIGHT = 800, 600
-# Set up the screen
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Game Title")
 
@@ -12,7 +11,6 @@ doom_sound = pygame.mixer.Sound("../Assets/audio/doom/doom.mp3")
 
 doom_phone = pygame.image.load("../Assets/sprites/doom/doom_phone.png")
 bg_descent = pygame.image.load("../Assets/sprites/doom/doom1.png")
-
 
 clock = pygame.time.Clock()
 
