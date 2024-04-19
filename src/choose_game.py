@@ -107,11 +107,11 @@ while running:
             exec(open("unlocked_home_page.py").read())
         elif play_button_rect2.collidepoint(event.pos):
             running = False 
-            execute_level("factory.py")
+            execute_level("scene2.py")
             exec(open("unlocked_home_page.py").read())
         elif play_button_rect3.collidepoint(event.pos):
             running = False 
-            execute_level("throw.py")
+            execute_level("scene3.py")
             exec(open("unlocked_home_page.py").read())
         elif play_button_rect4.collidepoint(event.pos):
             running = False 

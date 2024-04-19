@@ -12,8 +12,6 @@ pygame.init()
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
-# bg_audio_3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
-# bg_audio_3.set_volume(5)
 bg_audio = pygame.mixer.Sound("../Assets/audio/scene2/scene2_bg_audio.mp3")
 bg_audio.set_volume(0.4)
 
@@ -61,8 +59,6 @@ sprite_fall4 = pygame.image.load("../Assets/sprites/scene2/fall4.png")
 sprites = []
 trampoline_rect = trampoline_img.get_rect(midbottom=(WIDTH // 2, HEIGHT))
 
-# pause_rect = pygame.Rect()
-
 trampoline_speed = 15
 score = 0
 neg_score =0
@@ -77,6 +73,7 @@ text_rect = text_surface.get_rect(topleft=(15,15))
 pause = False
 
 last_spawned =0
+last_to_last_spawned = 0
 
 bg_audio.play()
 
@@ -191,11 +188,11 @@ while running:
 
         if len(sprites) < 3:
             temp = random.randint(1,100)
-            if temp>97:
+            if temp<2 or temp>98 or (temp>48 and temp<51):
                 launch_at = random.randint(75, WIDTH - sprite_img_fall.get_width()-75)
-                if abs(launch_at-last_spawned)>100:
-                    sprites.append([sprite_img_fall.get_rect(topleft=(launch_at, 140-sprite_img_fall.get_height()))
-            ,-1,3,0])
+                if abs(launch_at-last_spawned)>100 and abs(launch_at-last_to_last_spawned)>100:
+                    sprites.append([sprite_img_fall.get_rect(topleft=(launch_at, 140-sprite_img_fall.get_height())),-1,3,0])
+                    last_to_last_spawned = last_spawned
                     last_spawned = launch_at
 
         for sprite_rect in sprites:
@@ -233,8 +230,6 @@ while running:
             if score>7:
                 pygame.mixer.stop()
                 running = False
-                # bg_audio_3.play()
-                # exec(open("throw.py").read())
             else:
                 pygame.mixer.pause()
                 execute_failure()
@@ -243,6 +238,5 @@ while running:
                 score=0
                 neg_score=0  
     
-
     pygame.display.flip()
     clock.tick(30)

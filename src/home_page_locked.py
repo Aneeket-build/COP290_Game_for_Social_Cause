@@ -17,22 +17,12 @@ pygame.display.set_caption("Game Title")
 
 play_hover_sound = pygame.mixer.Sound("../Assets/audio/main_page/play_hover_sound.mp3")
 locked_sound = pygame.mixer.Sound("../Assets/audio/main_page/locked_sound.wav")
-story_msg = pygame.mixer.Sound('../Assets/audio/scene1/story13.wav')
-bg_audio2 = pygame.mixer.Sound("../Assets/audio/scene2/scene2_audio.wav")
-bg_audio3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
-bg_audio4 = pygame.mixer.Sound('../Assets/audio/scene4/scene4_audio.wav')
-
-
 
 background = pygame.image.load("../Assets/sprites/main_page/main.jpg")
 background = pygame.transform.scale(background, (800, 600))
 screen_img = pygame.image.load("../Assets/sprites/main_page/phone_screen.png")
 lock_img = pygame.image.load("../Assets/sprites/main_page/lock.png")
 lock_img = pygame.transform.scale(lock_img,(40,40))
-
-font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", 45)
-
-screen_name = "home page"
 
 text_size = 28
 text_size2 = 27
@@ -44,7 +34,6 @@ pause = 0
 clock = pygame.time.Clock()
 
 running = True
-
 
 font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size)
 play_button = font.render(play_text, True, (0, 0, 0))
@@ -85,10 +74,10 @@ while running:
             execute_level("scene1.py")
             pygame.mixer.stop()
             msg.set_message(2)
-            execute_level("factory.py")
+            execute_level("scene2.py")
             pygame.mixer.stop()
             msg.set_message(3)
-            execute_level("throw.py")
+            execute_level("scene3.py")
             pygame.mixer.stop()
             msg.set_message(4)
             execute_level("scene4.py")
@@ -96,8 +85,6 @@ while running:
             execute_level("cycle.py")
             execute_level("doom.py")
             exec(open("unlocked_home_page.py").read())
-            
-            
 
     screen.blit(background, (0, 0))
     screen.blit(screen_img,(271,108))
