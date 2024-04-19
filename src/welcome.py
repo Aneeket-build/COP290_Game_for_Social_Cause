@@ -60,7 +60,7 @@ clock = pygame.time.Clock()
 faces = pygame.sprite.GroupSingle()
 faces.add(Face(521,108))
 bg_music = pygame.mixer.Sound('../Assets/audio/face/hello_consumer1.wav')
-bg_music.set_volume(0.2)
+bg_music.set_volume(0.5)
 bg_music.play()
 
 start_time = pygame.time.get_ticks()

@@ -191,7 +191,7 @@ while running:
 
         if len(sprites) < 3:
             temp = random.randint(1,100)
-            if temp>96:
+            if temp>97:
                 launch_at = random.randint(75, WIDTH - sprite_img_fall.get_width()-75)
                 if abs(launch_at-last_spawned)>100:
                     sprites.append([sprite_img_fall.get_rect(topleft=(launch_at, 140-sprite_img_fall.get_height()))

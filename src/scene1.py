@@ -263,12 +263,13 @@ bg_audio.set_volume(0.2)
 # bg_music = pygame.mixer.Sound('')
 # bg_music.play(loops = -1)
 
+tired_count = 0
+
 font = pygame.font.Font(None, 30)
-message = "Click on those tired bastards to keep them digging "
+message = "Slaves Digging: " + str(10-tired_count)
 text_surface = font.render(message, True, (255, 255, 255))
-text_rect = text_surface.get_rect()
-text_rect.centerx = screen.get_rect().centerx
-text_rect.top = 20 
+text_rect = text_surface.get_rect(topleft=(15,15))
+
 # Groups
 
 worker_group_left = pygame.sprite.Group()
@@ -359,7 +360,7 @@ while running:
         for worker in workers_combined:
             tired_count += worker.curr_state
         if message_over == True:
-            if tired_count > 4 :
+            if tired_count > 3:
                 pygame.mixer.stop()
                 execute_failure()
                 bg_audio.play()
@@ -376,7 +377,12 @@ while running:
         screen.blit(background,(0,0))
         soldier_group.draw(screen)    
         soldier_group.update()
-
+        message = "Slaves Digging: " + str(10-tired_count)
+        if tired_count>3:
+            text_surface = font.render(message, True, (255, 0,0))
+        else:    
+            text_surface = font.render(message, True, ( 0,255,0))
+        text_rect = text_surface.get_rect(topleft=(15,15))
         screen.blit(text_surface, text_rect)
         screen.blit(pause_img,pause_img_rect)
 

@@ -10,6 +10,7 @@ def execute_failure():
     exec(code)
 
 fallen_objects = 0
+total_objects = 0
 
 class Fireman(pygame.sprite.Sprite):
     def __init__(self,x,y):
@@ -515,6 +516,12 @@ bg_audio.set_volume(0.5)
 # Define the color
 BLACK = (0, 0, 0)
 
+font = pygame.font.Font(None, 30)
+message = "Failed to Dispose: " + str(fallen_objects) + " / 10"
+text_surface = font.render(message, True, (255, 255, 255))
+text_rect = text_surface.get_rect(topleft=(15,15))
+
+
 count = 0
 
 message_over = False
@@ -580,7 +587,8 @@ while running:
                     motherboard_group.add(Motherboard(randint(350,450), -50, sili_woman_group))
                 elif choice == 4:
                     chemical_group.add(Chemical(randint(350,450), -50, fireman_group))
-
+                total_objects += 1
+                
             for broken_phone in broken_phone_group:
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if broken_phone.rect.collidepoint(event.pos):
@@ -636,6 +644,10 @@ while running:
                 running = False
 
         screen.blit(background,(0,0))
+        message = "Failed to Dispose: " + str(fallen_objects) + " / 10" 
+        text_surface = font.render(message, True, (255, 255, 255))
+        text_rect = text_surface.get_rect(topleft=(15,15))
+        screen.blit(text_surface,text_rect)
         screen.blit(pause_img,pause_img_rect)
 
         fireman_group.draw(screen)    
