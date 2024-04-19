@@ -24,6 +24,7 @@ bg_audio4 = pygame.mixer.Sound('../Assets/audio/scene4/scene4_audio.wav')
 
 background = pygame.image.load("../Assets/sprites/main_page/main.jpg")
 background = pygame.transform.scale(background, (800, 600))
+screen_img = pygame.image.load("../Assets/sprites/main_page/phone_screen.png")
 
 screen_name = "home page"
 
@@ -92,7 +93,7 @@ while running:
             exec(open("choose_game.py").read())
 
     screen.blit(background, (0, 0))
-
+    screen.blit(screen_img,(271,108))
     font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size)
     play_button = font.render(play_text, True, (0, 0, 0))
     play_button_rect = play_button.get_rect(center=(400, 350))

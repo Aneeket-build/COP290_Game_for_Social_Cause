@@ -25,6 +25,7 @@ bg_audio4 = pygame.mixer.Sound('../Assets/audio/scene4/scene4_audio.wav')
 
 background = pygame.image.load("../Assets/sprites/main_page/main.jpg")
 background = pygame.transform.scale(background, (800, 600))
+screen_img = pygame.image.load("../Assets/sprites/main_page/phone_screen.png")
 lock_img = pygame.image.load("../Assets/sprites/main_page/lock.png")
 lock_img = pygame.transform.scale(lock_img,(40,40))
 
@@ -98,6 +99,7 @@ while running:
             
 
     screen.blit(background, (0, 0))
+    screen.blit(screen_img,(271,108))
     screen.blit(lock_img,(285,390))
 
     font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size)

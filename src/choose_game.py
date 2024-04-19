@@ -17,6 +17,7 @@ play_hover_sound = pygame.mixer.Sound("../Assets/audio/main_page/play_hover_soun
 
 background = pygame.image.load("../Assets/sprites/main_page/main.jpg")
 background = pygame.transform.scale(background, (800, 600))
+screen_img = pygame.image.load("../Assets/sprites/main_page/phone_screen_plain.png")
 
 text_size1 = 25
 text_size2 = 25
@@ -46,10 +47,10 @@ font4 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size4
 play_button4 = font4.render(text4, True, (0, 0, 0))
 play_button_rect4 = play_button4.get_rect(center=(400, 420))
 
-head_font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", 35)
-head_text = head_font.render("Choose",True,(255,0,0))
+head_font = pygame.font.Font("../Assets/sprites/main_page/choose_font.ttf", 50)
+head_text = head_font.render("Choose",True,(255,180,60))
 head_text_rect = head_text.get_rect(center=(400,135))
-head_text2 = head_font.render("Game",True,(255,0,0))
+head_text2 = head_font.render("Game",True,(255,180,60))
 head_text_rect2 = head_text2.get_rect(center=(400,175))
 
 start_time = pygame.time.get_ticks()
@@ -107,7 +108,7 @@ while running:
             exec(open("unlocked_home_page.py").read())
 
     screen.blit(background, (0, 0))
-
+    screen.blit(screen_img,(271,108))
     font1 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size1)
     play_button1 = font1.render(text1, True, (0, 0, 0))
     play_button_rect1 = play_button1.get_rect(center=(400, 240))
@@ -125,11 +126,11 @@ while running:
     play_button_rect4 = play_button4.get_rect(center=(400, 420))
     screen.blit(play_button4,play_button_rect4)
     
-    head_font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", 35)
-    head_text = head_font.render("Choose",True,(255,0,0))
+    head_font = pygame.font.Font("../Assets/sprites/main_page/choose_font.ttf", 50)
+    head_text = head_font.render("Choose",True,(255,180,60))
     head_text_rect = head_text.get_rect(center=(400,135))
     screen.blit(head_text,head_text_rect)
-    head_text2 = head_font.render("Game",True,(255,0,0))
+    head_text2 = head_font.render("Game",True,(255,180,60))
     head_text_rect2 = head_text2.get_rect(center=(400,175))
     screen.blit(head_text2,head_text_rect2)
 
