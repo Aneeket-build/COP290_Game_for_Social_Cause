@@ -70,11 +70,9 @@ neg_score =0
 clock = pygame.time.Clock()
 
 font = pygame.font.Font(None, 30)
-message = "Use left and right arrow keys to save the workers."
+message = "Working Hands Saved: " + str(2*score) + " / " + str(2*(score+neg_score)) 
 text_surface = font.render(message, True, (255, 255, 255))
-text_rect = text_surface.get_rect()
-text_rect.centerx = screen.get_rect().centerx
-text_rect.top = 15
+text_rect = text_surface.get_rect(topleft=(15,15))
 
 pause = False
 
@@ -193,7 +191,7 @@ while running:
 
         if len(sprites) < 3:
             temp = random.randint(1,100)
-            if temp<5:
+            if temp>96:
                 launch_at = random.randint(75, WIDTH - sprite_img_fall.get_width()-75)
                 if abs(launch_at-last_spawned)>100:
                     sprites.append([sprite_img_fall.get_rect(topleft=(launch_at, 140-sprite_img_fall.get_height()))
@@ -222,12 +220,17 @@ while running:
             else:
                 screen.blit(sprite_img_fall, sprite_rect[0])
         screen.blit(trampoline_img, trampoline_rect)
-
+        message = "Working Hands Saved: " + str(2*score) + " / " + str(2*(score+neg_score))
+        if score/(score+neg_score+1) >= 0.55 : 
+            text_surface = font.render(message, True, (0,255,0))
+        else:
+            text_surface = font.render(message, True, (255,0,0))
+        text_rect = text_surface.get_rect(center=(150,15))
         screen.blit(text_surface, text_rect)
         screen.blit(pause_img,pause_img_rect)
 
         if score+neg_score==12:
-            if score>9:
+            if score>7:
                 pygame.mixer.stop()
                 running = False
                 # bg_audio_3.play()

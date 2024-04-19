@@ -57,12 +57,17 @@ runner6 = pygame.image.load('../Assets/sprites/scene3/catcher/run6.png')
 runner_hit = pygame.image.load('../Assets/sprites/scene3/catcher/hit.png')
 runner_catch = pygame.image.load('../Assets/sprites/scene3/catcher/catch.png')
 
+score=0
+neg_score=0
+
 font = pygame.font.Font(None, 30)
-message2 = "Pull and launch the new phone towards incoming customers."
+message2 = "Customers Fooled: "
+message3 = str(score) + " / " + str(score+neg_score)
 text_surface2 = font.render(message2,True,(255,255,255))
-text_rect2 = text_surface2.get_rect()
-text_rect2.centerx = screen.get_rect().centerx
-text_rect2.top = 150
+text_surface3 = font.render(message3,True,(255,255,255))
+text_rect2 = text_surface2.get_rect(topleft=(10,15))
+text_rect3 = text_surface3.get_rect(topleft=(85,50))
+
 
 thrower_pos = (400, 75)
 arm_stretched = False
@@ -105,16 +110,22 @@ clock = pygame.time.Clock()
 running = True
 thrower = 0
 
-score=0
-neg_score=0
-
 bg_audio.play()
 
 pause = False
 
 while running:
     screen.blit(bg_game3,(0,0))
+    message3 = str(score) + " / " + str(score+neg_score)
+    if score/(score+neg_score+1) > 0.5 :
+        text_surface2 = font.render(message2,True,(0,255,0))
+        text_surface3 = font.render(message3,True,(0,255,0))
+    else:
+        text_surface2 = font.render(message2,True,(255,0,0))
+        text_surface3 = font.render(message3,True,(255,0,0))
+    text_rect3 = text_surface2.get_rect(topleft=(85,50))
     screen.blit(text_surface2,text_rect2)
+    screen.blit(text_surface3,text_rect3)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -275,8 +286,8 @@ while running:
 
         screen.blit(pause_img,pause_img_rect)
 
-        if score+neg_score==25:
-            if score>20:
+        if score+neg_score==18:
+            if score>9:
                 pygame.mixer.stop()
                 running = False
                 # exec(open("rev.py").read())
