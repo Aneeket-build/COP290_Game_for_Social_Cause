@@ -88,6 +88,7 @@ while running:
     if pause:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if pause_button1_rect.collidepoint(event.pos):
+                pygame.mixer.unpause()
                 pause= False
             elif pause_button2_rect.collidepoint(event.pos):
                 sprites = []
@@ -127,6 +128,7 @@ while running:
     else:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if pause_img_rect.collidepoint(event.pos):
+                pygame.mixer.pause()
                 pause = True        
 
         keys = pygame.key.get_pressed()

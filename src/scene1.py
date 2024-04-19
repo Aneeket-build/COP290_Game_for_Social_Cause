@@ -304,6 +304,7 @@ while running:
                 exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
             if pause_button1_rect.collidepoint(event.pos):
+                pygame.mixer.unpause()
                 pause= False
             elif pause_button2_rect.collidepoint(event.pos):
                 for worker in workers_combined:
@@ -332,6 +333,7 @@ while running:
                 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if pause_img_rect.collidepoint(event.pos):
+                    pygame.mixer.pause()
                     pause = True        
                 else:
                     target_x, target_y = pygame.mouse.get_pos()

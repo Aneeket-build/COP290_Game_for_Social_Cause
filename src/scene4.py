@@ -532,6 +532,7 @@ while running:
                 exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
             if pause_button1_rect.collidepoint(event.pos):
+                pygame.mixer.unpause()
                 pause= False
             elif pause_button2_rect.collidepoint(event.pos):
                 fallen_objects=0
@@ -560,6 +561,7 @@ while running:
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pause_img_rect.collidepoint(event.pos):
+                    pygame.mixer.pause()
                     pause = True        
 
             if event.type == timer:

@@ -118,6 +118,7 @@ while running:
     if pause:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if pause_button1_rect.collidepoint(event.pos):
+                pygame.mixer.unpause()
                 pause= False
             elif pause_button2_rect.collidepoint(event.pos):
                 score=0
@@ -163,6 +164,7 @@ while running:
 
         if event.type == pygame.MOUSEBUTTONDOWN and not arm_stretched:
             if pause_img_rect.collidepoint(event.pos):
+                pygame.mixer.pause()
                 pause = True 
             else:    
                 arm_stretched = True
