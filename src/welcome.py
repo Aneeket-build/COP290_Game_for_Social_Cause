@@ -35,7 +35,7 @@ class Face(pygame.sprite.Sprite):
         if self.state == 0:
             # print("wow")
             if self.frame < 3:
-                if self.speaking_frames < 144:
+                if self.speaking_frames < 136:
                     self.frame += 0.2
                     self.speaking_frames += 1
                 else: 
@@ -50,10 +50,11 @@ class Face(pygame.sprite.Sprite):
                 self.frame = 0
     
 pygame.init()
+pygame.mixer.init()
 
 screen = pygame.display.set_mode((800, 600))
 background = pygame.image.load("../Assets/sprites/face/main.png")
-pygame.display.set_caption('Congo')
+pygame.display.set_caption('TOXIC TECH')
 clock = pygame.time.Clock()
 
 faces = pygame.sprite.GroupSingle()

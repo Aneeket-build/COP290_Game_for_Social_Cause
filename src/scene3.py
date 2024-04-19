@@ -8,6 +8,7 @@ def execute_failure():
     exec(code)
 
 pygame.init()
+pygame.mixer.init()
 
 bg_audio = pygame.mixer.Sound("../Assets/audio/scene3/scene3_bg_audio.mp3")
 bg_audio.set_volume(0.5)
@@ -17,6 +18,7 @@ catch_sound.set_volume(0.3)
 
 bg_game3 = pygame.image.load("../Assets/sprites/scene3/bg_game3.png")
 screen = pygame.display.set_mode((800, 600))
+pygame.display.set_caption("TOXIC TECH")
 
 pause_img = pygame.image.load("../Assets/sprites/main_page/pause_button.png")
 pause_img = pygame.transform.scale(pause_img,(30,30))
@@ -29,9 +31,9 @@ pause_size3 = 22
 pause_text1 = "RESUME GAME"
 pause_text2 = "RESTART GAME"
 pause_text3 = "MAIN MENU"
-pause_font1 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size1)
-pause_font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size2)
-pause_font3 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size3)
+pause_font1 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size1)
+pause_font2 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size2)
+pause_font3 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size3)
 pause_button1 = pause_font1.render(pause_text1,True,(0,0,0))
 pause_button2 = pause_font2.render(pause_text2,True,(0,0,0))
 pause_button3 = pause_font3.render(pause_text3,True,(0,0,0))
@@ -140,9 +142,10 @@ while running:
                 runners_catch = []
                 last_spawned = 0
                 last_to_last_spawned = 0
-                pygame.mixer.unpause()
+                bg_audio.play()
                 pause = False
             elif pause_button3_rect.collidepoint(event.pos):
+                pygame.mixer.stop()
                 exec(open("unlocked_home_page.py").read()) 
 
         screen.blit(stand_img, (thrower_pos[0] - stand_img.get_width() // 2, thrower_pos[1] - stand_img.get_height() // 2))            

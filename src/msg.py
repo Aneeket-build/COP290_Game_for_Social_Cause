@@ -3,6 +3,7 @@ from sys import exit
 
 # Initialize Pygame
 pygame.init()
+pygame.mixer.init()
 
 # Set up the screen
 screen = pygame.display.set_mode((800, 600))
@@ -10,7 +11,7 @@ background = pygame.image.load("../Assets/sprites/msgs/m1.png").convert_alpha()
 bg2 = pygame.image.load("../Assets/sprites/msgs/m5.png").convert_alpha()
 msg_box = pygame.image.load("../Assets/sprites/msgs/black_box.png").convert_alpha()
 warning = pygame.image.load("../Assets/sprites/msgs/warning.png").convert_alpha()
-pygame.display.set_caption('Congo')
+pygame.display.set_caption('TOXIC TECH')
 clock = pygame.time.Clock()
 
 bg_music = pygame.mixer.Sound("../Assets/audio/msg/ryuk_theme.wav")
@@ -22,11 +23,11 @@ bg_music.set_volume(initial_volume)
 font = pygame.font.Font("../Assets/fonts/arial.ttf", 28)
 
 # Scene 1
-msg1_1 = "Among the many precious minerals resting in the depths of the earth, one called 'coltan' contains Niobium and Tantalum which are used in most electronic devices. "
+msg1_1 = "Cobalt is a mineral that's essential for making the lithium-ion batteries that power our phones, laptops, and electric vehicles. "
 
-msg1_2 = "The majority of coltan's world supply is located in the Democratic Republic of the Congo - a country torn by a brutal civil war."
+msg1_2 = "The majority of cobalt's world supply is located in the Democratic Republic of the Congo - a country torn by a brutal civil war."
 
-msg1_3 = "The ever increasing demand of coltan created a wave of violence and massacre across Congo. Military groups enslaved prisoners of war - often children to mine the precious materials."
+msg1_3 = "The ever increasing demand of cobalt created a wave of violence and massacre across Congo. Military groups enslaved prisoners of war - often children to mine the precious materials."
 
 msg1_4 = "Directly or indirectly, we are all involved in this complex illegal traffic."
 
@@ -38,7 +39,7 @@ msg2_2 = "Due to flexible labour laws, the workers are subjected to much abuse a
 msg2_3 = "As a result, many workers commit suicide due to severe desperation."
 
 # Scene 3
-msg3_1 = "Then, you purchased this phone. It was new and sexy. You've waited for it for months. No evidence of its troubling past was visible."
+msg3_1 = "Then, you purchased this phone. It was new and classy. You've waited for it for months. No evidence of its troubling past was visible."
 msg3_2 = "But did you really need it? Of course you did! We have invested a lot of money to instill this desire in you."
 msg3_3 = "You were looking for something that could signal your status, your dynamic lifestyle, your unique personality. Just like everyone else..."
 

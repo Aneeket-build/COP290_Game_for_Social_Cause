@@ -435,6 +435,7 @@ class Line(pygame.sprite.Sprite):
             self.kill()
 
 pygame.init()
+pygame.mixer.init()
 
 pause_img = pygame.image.load("../Assets/sprites/main_page/pause_button.png")
 pause_img = pygame.transform.scale(pause_img,(30,30))
@@ -447,9 +448,9 @@ pause_size3 = 22
 pause_text1 = "RESUME GAME"
 pause_text2 = "RESTART GAME"
 pause_text3 = "MAIN MENU"
-pause_font1 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size1)
-pause_font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size2)
-pause_font3 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size3)
+pause_font1 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size1)
+pause_font2 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size2)
+pause_font3 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size3)
 pause_button1 = pause_font1.render(pause_text1,True,(0,0,0))
 pause_button2 = pause_font2.render(pause_text2,True,(0,0,0))
 pause_button3 = pause_font3.render(pause_text3,True,(0,0,0))
@@ -460,7 +461,7 @@ pause_button3_rect = pause_button3.get_rect(center=(400,360))
 # Set up the screen
 screen = pygame.display.set_mode((800, 600))
 background = pygame.image.load("../Assets/sprites/scene4/bg.png")
-pygame.display.set_caption('E-Waste')
+pygame.display.set_caption('TOXIC TECH')
 clock = pygame.time.Clock()
 
 fireman_group = pygame.sprite.GroupSingle()
@@ -502,7 +503,6 @@ message = "Failed to Dispose: " + str(fallen_objects) + " / 10"
 text_surface = font.render(message, True, (255, 255, 255))
 text_rect = text_surface.get_rect(topleft=(15,15))
 
-
 count = 0
 
 message_over = False
@@ -527,7 +527,7 @@ while running:
                 pygame.mixer.unpause()
                 pause= False
             elif pause_button2_rect.collidepoint(event.pos):
-                pygame.mixer.unpause()
+                bg_audio.play()
                 fallen_objects=0
                 message_over=False
                 start_time = time.time()
@@ -541,6 +541,7 @@ while running:
                     chemical.kill()
                 pause = False
             elif pause_button3_rect.collidepoint(event.pos):
+                pygame.mixer.stop()
                 exec(open("unlocked_home_page.py").read())   
         screen.blit(pause_box,(250,200))
         screen.blit(pause_button1,pause_button1_rect)

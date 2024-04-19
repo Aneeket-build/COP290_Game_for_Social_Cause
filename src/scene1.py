@@ -200,6 +200,7 @@ class Worker(pygame.sprite.Sprite):
 
 # Initialize Pygame
 pygame.init()
+pygame.mixer.init()
 
 pause_img = pygame.image.load("../Assets/sprites/main_page/pause_button.png")
 pause_img = pygame.transform.scale(pause_img,(30,30))
@@ -212,9 +213,9 @@ pause_size3 = 22
 pause_text1 = "RESUME GAME"
 pause_text2 = "RESTART GAME"
 pause_text3 = "MAIN MENU"
-pause_font1 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size1)
-pause_font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size2)
-pause_font3 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size3)
+pause_font1 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size1)
+pause_font2 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size2)
+pause_font3 = pygame.font.Font("../Assets/fonts/play_font.ttf", pause_size3)
 pause_button1 = pause_font1.render(pause_text1,True,(0,0,0))
 pause_button2 = pause_font2.render(pause_text2,True,(0,0,0))
 pause_button3 = pause_font3.render(pause_text3,True,(0,0,0))
@@ -226,7 +227,7 @@ pause_button3_rect = pause_button3.get_rect(center=(400,360))
 # Set up the screen
 screen = pygame.display.set_mode((800, 600))
 background = pygame.image.load("../Assets/sprites/scene1/bg.png")
-pygame.display.set_caption('Congo')
+pygame.display.set_caption('TOXIC TECH')
 clock = pygame.time.Clock()
 bg_audio = pygame.mixer.Sound("../Assets/audio/scene1/scene1_bg_audio.mp3")
 bg_audio.set_volume(0.2)
@@ -285,9 +286,10 @@ while running:
                     worker.frame = randint(0,3)
                 message_over=False
                 start_time = time.time()
-                pygame.mixer.unpause()
+                bg_audio.play()
                 pause = False
             elif pause_button3_rect.collidepoint(event.pos):
+                pygame.mixer.stop()
                 exec(open("unlocked_home_page.py").read())   
         screen.blit(pause_box,(250,200))
         screen.blit(pause_button1,pause_button1_rect)

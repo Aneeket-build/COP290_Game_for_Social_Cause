@@ -47,13 +47,14 @@ class Face(pygame.sprite.Sprite):
                 self.frame = 0
 
 pygame.init()
+pygame.mixer.init()
 
 screen = pygame.display.set_mode((800, 600))
 background = pygame.image.load("../Assets/sprites/face/main.png")
-pygame.display.set_caption('Congo')
+pygame.display.set_caption('TOXIC TECH')
 clock = pygame.time.Clock()
 play_hover_sound = pygame.mixer.Sound("../Assets/audio/main_page/play_hover_sound.mp3")
-font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", 45)
+font = pygame.font.Font("../Assets/fonts/play_font.ttf", 45)
 
 faces = pygame.sprite.GroupSingle()
 faces.add(Face(521, 108))
@@ -103,8 +104,8 @@ while running:
                 exec(open("unlocked_home_page.py").read())    
         
     screen.blit(background, (0, 0))
-    font = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size)
-    font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", text_size2)
+    font = pygame.font.Font("../Assets/fonts/play_font.ttf", text_size)
+    font2 = pygame.font.Font("../Assets/fonts/play_font.ttf", text_size2)
     faces.draw(screen)
     faces.update()
 

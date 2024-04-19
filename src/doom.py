@@ -2,10 +2,11 @@ import pygame
 import sys
 
 pygame.init()
+pygame.mixer.init()
 
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("Game Title")
+pygame.display.set_caption("TOXIC TECH")
 
 doom_sound = pygame.mixer.Sound("../Assets/audio/doom/doom.mp3")
 
