@@ -226,6 +226,28 @@ class Worker(pygame.sprite.Sprite):
 # Initialize Pygame
 pygame.init()
 
+pause_img = pygame.image.load("../Assets/sprites/main_page/pause_button.png")
+pause_img = pygame.transform.scale(pause_img,(30,30))
+pause_img_rect = pause_img.get_rect(center=(760,30))
+pause_box = pygame.image.load("../Assets/sprites/main_page/pause_box.png")
+pause_box.set_alpha(200)
+pause_size1 = 22
+pause_size2 = 22
+pause_size3 = 22
+pause_text1 = "RESUME GAME"
+pause_text2 = "RESTART GAME"
+pause_text3 = "MAIN MENU"
+pause_font1 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size1)
+pause_font2 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size2)
+pause_font3 = pygame.font.Font("../Assets/sprites/main_page/play_font.ttf", pause_size3)
+pause_button1 = pause_font1.render(pause_text1,True,(0,0,0))
+pause_button2 = pause_font2.render(pause_text2,True,(0,0,0))
+pause_button3 = pause_font3.render(pause_text3,True,(0,0,0))
+pause_button1_rect = pause_button1.get_rect(center=(400,240))
+pause_button2_rect = pause_button2.get_rect(center=(400,300))
+pause_button3_rect = pause_button3.get_rect(center=(400,360))
+
+
 # Set up the screen
 screen = pygame.display.set_mode((800, 600))
 background = pygame.image.load("../Assets/sprites/scene1/bg.png")
@@ -269,61 +291,92 @@ soldier_group.add(soldier_right)
 start_time = time.time()
 message_over = False
 
+pause = False
+
 running = True
 
 while running:
-    current_time = time.time()
-    elapsed_time = current_time - start_time
-    if elapsed_time > 38:
-        message_over = True
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            target_x, target_y = pygame.mouse.get_pos()
-            if target_x < 400:
-                for worker in worker_group_left:
-                    larger_rect = worker.rect.inflate(100, 0)
-                    if larger_rect.collidepoint(target_x, target_y):
-                        soldier_left.set_target(worker.rect.centerx , worker.rect.centery-45)
-                        print("Target x: " + str(soldier_left.target_x))
-                        print("Target y: " + str(soldier_left.target_y))
-            else:
-                for worker in worker_group_right:
-                    larger_rect = worker.rect.inflate(100, 0)
-                    if larger_rect.collidepoint(target_x, target_y):
-                        soldier_right.set_target(worker.rect.centerx, worker.rect.centery-45)
     
-    tired_count = 0
-    for worker in workers_combined:
-        tired_count += worker.curr_state
-    if message_over == True:
-        if tired_count > 4 :
-            pygame.mixer.stop()
-            execute_failure()
-            for worker in workers_combined:
-                worker.curr_state = 0
-                worker.frame = randint(0,3)
-            message_over=False
-            start_time = time.time()
-        else:
-            pygame.mixer.stop()
-            running = False        
+    if pause:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if pause_button1_rect.collidepoint(event.pos):
+                pause= False
+            elif pause_button2_rect.collidepoint(event.pos):
+                for worker in workers_combined:
+                    worker.curr_state = 0
+                    worker.frame = randint(0,3)
+                message_over=False
+                start_time = time.time()
+                pause = False
+            elif pause_button3_rect.collidepoint(event.pos):
+                exec(open("unlocked_home_page.py").read())   
+        screen.blit(pause_box,(250,200))
+        screen.blit(pause_button1,pause_button1_rect)
+        screen.blit(pause_button2,pause_button2_rect)
+        screen.blit(pause_button3,pause_button3_rect)     
+    else:
         
-    # screen.fill((255, 255, 255))
-    screen.blit(background,(0,0))
-    soldier_group.draw(screen)    
-    soldier_group.update()
+        current_time = time.time()
+        elapsed_time = current_time - start_time
+        if elapsed_time > 38:
+            message_over = True
 
-    screen.blit(text_surface, text_rect)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+                
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if pause_img_rect.collidepoint(event.pos):
+                    pause = True        
+                else:
+                    target_x, target_y = pygame.mouse.get_pos()
+                    if target_x < 400:
+                        for worker in worker_group_left:
+                            larger_rect = worker.rect.inflate(100, 0)
+                            if larger_rect.collidepoint(target_x, target_y):
+                                soldier_left.set_target(worker.rect.centerx , worker.rect.centery-45)
+                                print("Target x: " + str(soldier_left.target_x))
+                                print("Target y: " + str(soldier_left.target_y))
+                    else:
+                        for worker in worker_group_right:
+                            larger_rect = worker.rect.inflate(100, 0)
+                            if larger_rect.collidepoint(target_x, target_y):
+                                soldier_right.set_target(worker.rect.centerx, worker.rect.centery-45)
+            
+        tired_count = 0
+        for worker in workers_combined:
+            tired_count += worker.curr_state
+        if message_over == True:
+            if tired_count > 4 :
+                pygame.mixer.stop()
+                execute_failure()
+                for worker in workers_combined:
+                    worker.curr_state = 0
+                    worker.frame = randint(0,3)
+                message_over=False
+                start_time = time.time()
+            else:
+                pygame.mixer.stop()
+                running = False        
+            
+        # screen.fill((255, 255, 255))
+        screen.blit(background,(0,0))
+        soldier_group.draw(screen)    
+        soldier_group.update()
 
-    worker_group_left.draw(screen)
-    worker_group_left.update()
-    
-    worker_group_right.draw(screen)
-    worker_group_right.update()
+        screen.blit(text_surface, text_rect)
+        screen.blit(pause_img,pause_img_rect)
+
+        worker_group_left.draw(screen)
+        worker_group_left.update()
+        
+        worker_group_right.draw(screen)
+        worker_group_right.update()
     
     pygame.display.update()
     clock.tick(25)
