@@ -198,9 +198,11 @@ while running:
 
     if score+neg_score==25:
         if score>20:
+            pygame.mixer.stop()
             running = False
             # exec(open("rev.py").read())
         else:
+            pygame.mixer.stop()
             execute_failure()
             score=0
             neg_score=0  

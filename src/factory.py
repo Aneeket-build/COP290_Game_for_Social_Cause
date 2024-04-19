@@ -147,10 +147,12 @@ while running:
 
     if score+neg_score==8:
         if score>5:
+            pygame.mixer.stop()
             running = False
             # bg_audio_3.play()
             # exec(open("throw.py").read())
         else:
+            pygame.mixer.stop()
             execute_failure()
             sprites = []
             score=0

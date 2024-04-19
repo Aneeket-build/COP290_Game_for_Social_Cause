@@ -88,6 +88,7 @@ while running:
                 pause = 0
         if event.type == pygame.MOUSEBUTTONDOWN:
             if play_button_rect.collidepoint(event.pos):
+                pygame.mixer.stop()
                 running=False
         
     screen.blit(background, (0, 0))

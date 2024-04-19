@@ -552,6 +552,7 @@ while running:
                     chemical.dragging = False   
     if message_over == True:
         if fallen_objects > 10:
+            pygame.mixer.stop()
             execute_failure()
             fallen_objects=0
             message_over=False

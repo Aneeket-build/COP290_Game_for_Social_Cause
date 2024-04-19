@@ -301,6 +301,7 @@ while running:
         tired_count += worker.curr_state
     if message_over == True:
         if tired_count > 4 :
+            pygame.mixer.stop()
             execute_failure()
             for worker in workers_combined:
                 worker.curr_state = 0
@@ -308,6 +309,7 @@ while running:
             message_over=False
             start_time = time.time()
         else:
+            pygame.mixer.stop()
             running = False        
         
     # screen.fill((255, 255, 255))
