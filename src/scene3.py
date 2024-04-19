@@ -142,9 +142,10 @@ while running:
                 runners_catch = []
                 last_spawned = 0
                 last_to_last_spawned = 0
-                pygame.mixer.unpause()
+                bg_audio.play()
                 pause = False
             elif pause_button3_rect.collidepoint(event.pos):
+                pygame.mixer.stop()
                 exec(open("unlocked_home_page.py").read()) 
 
         screen.blit(stand_img, (thrower_pos[0] - stand_img.get_width() // 2, thrower_pos[1] - stand_img.get_height() // 2))            

@@ -286,9 +286,10 @@ while running:
                     worker.frame = randint(0,3)
                 message_over=False
                 start_time = time.time()
-                pygame.mixer.unpause()
+                bg_audio.play()
                 pause = False
             elif pause_button3_rect.collidepoint(event.pos):
+                pygame.mixer.stop()
                 exec(open("unlocked_home_page.py").read())   
         screen.blit(pause_box,(250,200))
         screen.blit(pause_button1,pause_button1_rect)

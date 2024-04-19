@@ -97,9 +97,10 @@ while running:
                 sprites = []
                 score=0
                 neg_score=0
-                pygame.mixer.unpause()
+                bg_audio.play()
                 pause = False
             elif pause_button3_rect.collidepoint(event.pos):
+                pygame.mixer.stop()
                 exec(open("unlocked_home_page.py").read())    
         for sprite_rect in sprites:
             if sprite_rect[1]==1:
