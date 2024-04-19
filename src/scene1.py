@@ -261,8 +261,8 @@ for worker in workers_right:
     worker_group_right.add(worker)
 
 soldier_group = pygame.sprite.Group()
-soldier_left = Soldier(200,500,worker_group_left,is_inverted=True)
-soldier_right = Soldier(600,500,worker_group_right)
+soldier_left = Soldier(160,500,worker_group_left,is_inverted=True)
+soldier_right = Soldier(640,500,worker_group_right)
 soldier_group.add(soldier_left)
 soldier_group.add(soldier_right)
 
