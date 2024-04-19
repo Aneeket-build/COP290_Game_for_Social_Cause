@@ -63,7 +63,7 @@ trampoline_rect = trampoline_img.get_rect(midbottom=(WIDTH // 2, HEIGHT))
 
 # pause_rect = pygame.Rect()
 
-trampoline_speed = 10
+trampoline_speed = 15
 score = 0
 neg_score =0
 
@@ -77,6 +77,8 @@ text_rect.centerx = screen.get_rect().centerx
 text_rect.top = 15
 
 pause = False
+
+last_spawned =0
 
 bg_audio.play()
 
@@ -189,9 +191,14 @@ while running:
                     sprites.remove(sprite_rect)
                     sprite_rect[3] = 0    
 
-        if len(sprites) < 2:
-            sprites.append([sprite_img_fall.get_rect(topleft=(random.randint(75, WIDTH - sprite_img_fall.get_width()-75), 140-sprite_img_fall.get_height()))
-    ,-1,3,0])
+        if len(sprites) < 3:
+            temp = random.randint(1,100)
+            if temp<5:
+                launch_at = random.randint(75, WIDTH - sprite_img_fall.get_width()-75)
+                if abs(launch_at-last_spawned)>100:
+                    sprites.append([sprite_img_fall.get_rect(topleft=(launch_at, 140-sprite_img_fall.get_height()))
+            ,-1,3,0])
+                    last_spawned = launch_at
 
         for sprite_rect in sprites:
             if sprite_rect[1]==1:
@@ -219,8 +226,8 @@ while running:
         screen.blit(text_surface, text_rect)
         screen.blit(pause_img,pause_img_rect)
 
-        if score+neg_score==8:
-            if score>5:
+        if score+neg_score==12:
+            if score>9:
                 pygame.mixer.stop()
                 running = False
                 # bg_audio_3.play()
