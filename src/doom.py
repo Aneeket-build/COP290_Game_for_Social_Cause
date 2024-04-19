@@ -2,6 +2,7 @@ import pygame
 import sys
 
 pygame.init()
+pygame.mixer.init()
 
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((800, 600))

@@ -8,6 +8,7 @@ def execute_failure():
     exec(code)
 
 pygame.init()
+pygame.mixer.init()
 
 bg_audio = pygame.mixer.Sound("../Assets/audio/scene3/scene3_bg_audio.mp3")
 bg_audio.set_volume(0.5)

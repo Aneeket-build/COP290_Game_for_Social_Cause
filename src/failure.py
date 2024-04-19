@@ -47,6 +47,7 @@ class Face(pygame.sprite.Sprite):
                 self.frame = 0
 
 pygame.init()
+pygame.mixer.init()
 
 screen = pygame.display.set_mode((800, 600))
 background = pygame.image.load("../Assets/sprites/face/main.png")

@@ -8,6 +8,7 @@ def execute_failure():
     exec(code)
 
 pygame.init()
+pygame.mixer.init()
 
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))

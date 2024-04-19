@@ -200,6 +200,7 @@ class Worker(pygame.sprite.Sprite):
 
 # Initialize Pygame
 pygame.init()
+pygame.mixer.init()
 
 pause_img = pygame.image.load("../Assets/sprites/main_page/pause_button.png")
 pause_img = pygame.transform.scale(pause_img,(30,30))
