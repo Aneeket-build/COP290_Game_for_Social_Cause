@@ -51,7 +51,6 @@ class Face(pygame.sprite.Sprite):
     
 pygame.init()
 
-# Set up the screen
 screen = pygame.display.set_mode((800, 600))
 background = pygame.image.load("../Assets/sprites/face/main.png")
 pygame.display.set_caption('Congo')
@@ -84,6 +83,3 @@ while running:
 
     pygame.display.update()
     clock.tick(25)
-
-
-

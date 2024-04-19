@@ -481,7 +481,7 @@ for j in range(1,30):
 
 # Timer 
 timer = pygame.USEREVENT + 1
-pygame.time.set_timer(timer,1500)
+pygame.time.set_timer(timer,1250)
 
 broken_phone_group = pygame.sprite.Group()
 

@@ -9,7 +9,6 @@ def execute_level(file_name):
         code = file.read()
     exec(code,globals(),locals())  
 
-
 pygame.init()
 
 WIDTH, HEIGHT = 800, 600
@@ -17,17 +16,10 @@ screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Game Title")
 
 play_hover_sound = pygame.mixer.Sound("../Assets/audio/main_page/play_hover_sound.mp3")
-story_msg = pygame.mixer.Sound('../Assets/audio/scene1/story13.wav')
-bg_audio2 = pygame.mixer.Sound("../Assets/audio/scene2/scene2_audio.wav")
-bg_audio3 = pygame.mixer.Sound("../Assets/audio/scene3/scene3_audio.wav")
-bg_audio4 = pygame.mixer.Sound('../Assets/audio/scene4/scene4_audio.wav')
-
 
 background = pygame.image.load("../Assets/sprites/main_page/main.jpg")
 background = pygame.transform.scale(background, (800, 600))
 screen_img = pygame.image.load("../Assets/sprites/main_page/phone_screen.png")
-
-screen_name = "home page"
 
 text_size = 29
 text_size2 = 29
@@ -73,7 +65,7 @@ while running:
     current_time = pygame.time.get_ticks()  
             
     if event.type == pygame.MOUSEBUTTONDOWN:
-        if play_button_rect.collidepoint(event.pos) and (current_time-start_time)>2000:
+        if play_button_rect.collidepoint(event.pos) and (current_time-start_time)>1000:
             execute_level("welcome.py")
             msg.set_message(1)
             execute_level("scene1.py")
@@ -89,7 +81,7 @@ while running:
             pygame.mixer.stop()
             execute_level("cycle.py")
             execute_level("doom.py")
-        elif free_play_button_rect.collidepoint(event.pos) and (current_time-start_time)>2000:
+        elif free_play_button_rect.collidepoint(event.pos) and (current_time-start_time)>1000:
             running = False    
             exec(open("choose_game.py").read())
 
