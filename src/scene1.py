@@ -230,13 +230,6 @@ pygame.display.set_caption('Congo')
 clock = pygame.time.Clock()
 bg_audio = pygame.mixer.Sound("../Assets/audio/scene1/scene1_bg_audio.mp3")
 bg_audio.set_volume(0.2)
-# story_msg = pygame.mixer.Sound('../Assets/audio/scene1/story13.wav')
-# story_msg.play()
-# bg_music = pygame.mixer.Sound('../Assets/audio/scene1/happy1.wav')
-# bg_music.set_volume(0.2)
-# bg_music.play()
-# bg_music = pygame.mixer.Sound('')
-# bg_music.play(loops = -1)
 
 tired_count = 0
 
