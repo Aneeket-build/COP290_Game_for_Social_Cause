@@ -2,6 +2,7 @@ import pygame
 import sys
 import math
 from random import randint
+import msg
 
 def execute_level(file_name):
     with open(file_name, 'r') as file:
@@ -74,16 +75,16 @@ while running:
     if event.type == pygame.MOUSEBUTTONDOWN:
         if play_button_rect.collidepoint(event.pos) and (current_time-start_time)>2000:
             execute_level("welcome.py")
-            story_msg.play()
+            msg.set_message(1)
             execute_level("scene1.py")
             pygame.mixer.stop()
-            bg_audio2.play()
+            msg.set_message(2)
             execute_level("factory.py")
             pygame.mixer.stop()
-            bg_audio3.play()
+            msg.set_message(3)
             execute_level("throw.py")
             pygame.mixer.stop()
-            bg_audio4.play()
+            msg.set_message(4)
             execute_level("scene4.py")
             pygame.mixer.stop()
             execute_level("cycle.py")

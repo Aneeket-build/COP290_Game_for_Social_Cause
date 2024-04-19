@@ -63,8 +63,8 @@ bg_music = pygame.mixer.Sound('../Assets/audio/face/failure1.wav')
 # bg_music.set_volume(0.2)
 bg_music.play()
 
-text_size = 20
-text_size2 =20
+text_size = 25
+text_size2 =25
 text = "TRY AGAIN"
 text2 = "MAIN MENU"
 play_button = font.render(text, True, (0, 0, 0))

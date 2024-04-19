@@ -623,25 +623,24 @@ while running:
         if elapsed_time > 32:
             message_over = True
                     
+        if fallen_objects >= 10:
+            pygame.mixer.stop()
+            execute_failure()
+            bg_audio.play()
+            fallen_objects=0
+            message_over=False
+            start_time = time.time()
+            for broken_phone in broken_phone_group:
+                broken_phone.kill()
+            for motherboard in motherboard_group:
+                motherboard.kill()
+            for flask in flask_group:
+                flask.kill()
+            for chemical in chemical_group:
+                chemical.kill()
         if message_over == True:
-            if fallen_objects > 10:
-                pygame.mixer.stop()
-                execute_failure()
-                bg_audio.play()
-                fallen_objects=0
-                message_over=False
-                start_time = time.time()
-                for broken_phone in broken_phone_group:
-                    broken_phone.kill()
-                for motherboard in motherboard_group:
-                    motherboard.kill()
-                for flask in flask_group:
-                    flask.kill()
-                for chemical in chemical_group:
-                    chemical.kill()
-            else:
-                pygame.mixer.stop()
-                running = False
+            pygame.mixer.stop()
+            running = False
 
         screen.blit(background,(0,0))
         message = "Failed to Dispose: " + str(fallen_objects) + " / 10" 
